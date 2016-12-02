@@ -1,0 +1,70 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <title>Сервіс обліку студентів</title>
+    {% block stylesheet %}
+    {% endblock %}
+</head>
+<body>
+<!------------------ Start Container ------------------------------->
+<div class="container">
+    <!--------- Start Header --------->
+    <div class="row" id="header">
+        <!----- Logo ----->
+        <div class="col-xs-8">
+            <h1>Сервіс обліку студентів</h1>
+        </div>
+
+        <!----- Group selector ----->
+        <div class="col-xs-4" id="group-selector">
+            <strong>Група:</strong>
+            <select name="" id="">
+                <option value="">Усі студенти</option>
+                <option value="">ЕО-21 Рибонька Станіслав (№222)</option>
+                <option value="">ЕО-23 Гончар Петро (№211)</option>
+            </select>
+        </div>
+    </div>
+    <!------ End Header ------>
+
+    <!------ Start Subheader ------>
+    <div class="row" id="sub-header">
+        <div class="col-xs-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation"><a href="{% url 'students_db' %}">Студенти</a></li>
+                <li role="presentation"><a href="{% url 'count_visits' %}">Відвідування</a></li>
+                <li role="presentation"><a href="{% url 'students_group' %}">Групи</a></li>
+            </ul>
+        </div>
+    </div>
+    <!------ End Subheader ------>
+
+
+    {% block content %}
+    {% endblock %}
+    <!------ Start Footer ------>
+    <div class="row" id="footer">
+        <div class="col-xs-12 text-center">
+            &copy;2016 Сервіс Обліку студентів
+        </div>
+    </div>
+</div>
+<!------ End Footer ------>
+{% block javascript %}
+{% endblock %}
+<!------ Javascripts Section ------>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

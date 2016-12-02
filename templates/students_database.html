@@ -1,50 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/main.css">
-    <title>Сервіс обліку студентів</title>
-</head>
-<body>
-<!-- Start Container -->
-<div class="container">
-    <!-- Start Header -->
-    <div class="row" id="header">
-        <!-- Logo -->
-        <div class="col-xs-8">
-            <h1>Сервіс обліку студентів</h1>
-        </div>
+{% extends 'base.html' %}
 
-        <!-- Group selector -->
-        <div class="col-xs-4" id="group-selector">
-            <strong>Група:</strong>
-            <select name="" id="">
-                <option value="">Усі студенти</option>
-                <option value="">ЕО-21 Рибонька Станіслав (№222)</option>
-                <option value="">ЕО-23 Гончар Петро (№211)</option>
-            </select>
-        </div>
-    </div>
-    <!-- End Header -->
+{% block stylesheet %}
 
-    <!-- Start Subheader -->
-    <div class="row" id="sub-header">
-        <div class="col-xs-12">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#">Студенти</a></li>
-                <li role="presentation"><a href="#">Відвідування</a></li>
-                <li role="presentation"><a href="#">Групи</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- End Subheader -->
+{% endblock %}
 
+
+{% block content %}
     <!-- Start main page contant -->
     <div class="row" id="content-columns">
         <div class="col-xs-12" id="content-column">
@@ -69,7 +30,8 @@
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td><img src="./img/foto.jpg" height="30" width="30" alt="foto" class="img-responsive img-circle">
+                    <td><img src="../static/img/foto.jpg" height="30" width="30" alt="foto"
+                             class="img-responsive img-circle">
                     </td>
                     <td><a href="#" title="Редагувати">Гончар</a></td>
                     <td><a href="#" title="Редагувати">Петро</a></td>
@@ -112,23 +74,11 @@
             <!--End Pagination -->
         </div>
     </div>
-</div>
-<!-- End Main Page content -->
-
-<!-- Start Footer -->
-<div class="row" id="footer">
-    <div class="col-xs-12 text-center">
-        &copy;2016 Сервіс Обліку студентів
     </div>
-</div>
-</div>
+    <!-- End Main Page content -->
+{% endblock %}
 
-<!-- Javascripts Section -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+
+{% block javascript %}
+
+{% endblock %}
