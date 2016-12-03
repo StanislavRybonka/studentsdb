@@ -4,78 +4,64 @@
 
 {% endblock %}
 
-
 {% block content %}
-    <!-- Start main page contant -->
     <div class="row" id="content-columns">
         <div class="col-xs-12" id="content-column">
             <!-- Status Message -->
             <div class="alert alert-warning">Зміни скасовано</div>
-            <h2>База студентів</h2>
-
-            <a href="#" class="btn btn-primary">Додати студента</a>
-
-            <!-- Start Students Listing -->
-            <table class="table table-hover table-striped">
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Фото</th>
-                    <th>Прізвище</th>
-                    <th>Ім*я</th>
-                    <th>№ Білету</th>
-                    <th>Дія</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><img src="../static/img/foto.jpg" height="30" width="30" alt="foto"
-                             class="img-responsive img-circle">
-                    </td>
-                    <td><a href="#" title="Редагувати">Гончар</a></td>
-                    <td><a href="#" title="Редагувати">Петро</a></td>
-                    <td>221</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
-                                </li>
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
-                                </li>
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#">Видалити</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- End Students Listing -->
-
-            <!--Start Pagination -->
-            <nav>
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </nav>
-            <!--End Pagination -->
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>База студентів</h2></div>
+                <div class="panel-body">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Фото</th>
+                            <th>Прізвище</th>
+                            <th>Ім*я</th>
+                            <th>№ Білету</th>
+                            <th>Дія</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><img src="../static/img/foto1.jpg" height="30" width="30" alt="foto"
+                                     class="img-responsive img-circle rotateimg90">
+                            </td>
+                            <td><a href="#" title="Редагувати">Гончар</a></td>
+                            <td><a href="#" title="Редагувати">Петро</a></td>
+                            <td>221</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button"
+                                            data-toggle="dropdown">Дія
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="#">Видалити</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-right">
+                        <a href="#" class="btn btn-primary">Додати студента</a>
+                    </div>
+                </div>
+            </div>
+            {% include 'snippets/pagination.html' %}
         </div>
     </div>
-    </div>
-    <!-- End Main Page content -->
 {% endblock %}
 
 

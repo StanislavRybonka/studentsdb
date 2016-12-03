@@ -4,11 +4,84 @@
 
 {% endblock %}
 
-
 {% block content %}
-    <p>Hello from count visit page</p>
+    <div class="row" id="count-visits-row">
+        <div class="col-xs-12" id="count-visits-xs">
+            <div class="alert alert-warning">Some message here</div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Облік відвідування</h2></div>
+                <div class="panel-body">
+                    <div class="text-center">
+                        <a href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                        </a>
+                        Листопад 2016
+                        <a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <table class="table table-bordered text-center" id="visits-table">
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Студент</th>
+                            <th>Ср 1</th>
+                            <th>Чт 2</th>
+                            <th>Пт 3</th>
+                            <th>Сб 4</th>
+                            <th>Нд 5</th>
+                            <th>Пн 6</th>
+                            <th>Вт 7</th>
+                            <th>Ср 8</th>
+                            <th>Чт 9</th>
+                            <th>Пт 10</th>
+                            <th>Сб 11</th>
+                            <th>Нд 12</th>
+                            <th>Пн 13</th>
+                            <th>Вт 14</th>
+                            <th>Ср 15</th>
+                            <th>Чт 16</th>
+                            <th>Пт 17</th>
+                            <th>Сб 18</th>
+                            <th>Нд 19</th>
+                            <th>Пн 20</th>
+                            <th>Вт 21</th>
+                            <th>Ср 22</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="{% url 'edit_students' %}">Рибонька Станіслав</a></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% include 'snippets/pagination.html' %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascript %}
-
 {% endblock %}
