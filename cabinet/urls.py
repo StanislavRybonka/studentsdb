@@ -4,7 +4,7 @@ from .views import StudentsDataBaseView, StudentsGroupView, CountVisitsView, Stu
 
 urlpatterns = [
     url(r'^students/$', StudentsDataBaseView.as_view(), name="students_db"),
-    url(r'^group/$', StudentsGroupView.as_view(), name="students_group"),
+    url(r'^$', StudentsGroupView.as_view(), name="students_group"),
     url(r'^visits/$', CountVisitsView.as_view(), name="count_visits"),
     url(r'^edit/$', StudentsEditView.as_view(), name="edit_students")
 
