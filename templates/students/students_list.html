@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% block meta_title %}Студенти{% endblock %}
 {% block stylesheet %}
-
 {% endblock %}
 
 {% block content %}
     <div class="row" id="content-columns">
         <div class="col-xs-12" id="content-column">
             <!-- Status Message -->
+            {% comment 'Not used alert so far' %}
             <div class="alert alert-warning">Зміни скасовано</div>
+            {% endcomment %}
             <div class="panel panel-default">
                 <div class="panel-heading"><h2>База студентів</h2></div>
                 <div class="panel-body">
