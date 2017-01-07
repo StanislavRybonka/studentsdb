@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <div class="row" id="edit-form-row">
         <div class="col-xs-12" id="edit-form-xs">
             <div class="alert alert-warning">Some message here</div>
 
-
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Персональні дані</h2></div>
+                <div class="panel-heading"><h2>Персональні дані {{ sid }}</h2></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-5">
@@ -74,4 +74,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

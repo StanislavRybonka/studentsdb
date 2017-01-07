@@ -30,13 +30,10 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
+                                            <a role="menuitem" tabindex="-1" href="{% url 'groups_edit' 1 %}">Редагувати</a>
                                         </li>
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="#">Редагувати</a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="#">Видалити</a>
+                                            <a role="menuitem" tabindex="-1" href="{% url 'groups_delete' 1 %}">Видалити</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -45,7 +42,7 @@
                         </tbody>
                     </table>
                     <div class="text-right">
-                        <a href="#" class="btn btn-primary">Додати групу</a>
+                        <a href="{% url 'groups_add' %}" class="btn btn-primary">Додати групу</a>
                     </div>
                 </div>
             </div>
