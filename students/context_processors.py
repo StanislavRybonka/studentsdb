@@ -1,5 +1,5 @@
-from studentsdb.settings import BASE_URL
-
 
 def students_processor(request):
-    return {'BASE_URL': BASE_URL}
+    absolute_url = "http://{}:{}".format(request.META['SERVER_NAME'], request.META['SERVER_PORT'])
+
+    return {'ABSOLUTE_URL': absolute_url}

@@ -1,1 +1,24 @@
-hello from students delete page
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block meta_title %}Видалити студента{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-warning">Some message here</div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Видалити студента {{ sid }}</h2></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>Some content will be here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

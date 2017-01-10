@@ -1,3 +1,22 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block meta_title %}Оновити відвідування студента{% endblock %}
 
-journal update page
+{% block content %}
+  <div class="row" id="add_group-form-row">
+        <div class="col-xs-12" id="edit-form-xs">
+            <div class="alert alert-warning">Some message here</div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Оновити відвідування студента {{ gid }}</h2></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-5">
+                            Some action here
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

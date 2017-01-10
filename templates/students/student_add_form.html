@@ -1,2 +1,80 @@
 {% extends 'base.html' %}
-hello from student add form page
+{% load static from staticfiles %}
+{% block meta_title %}Додати студента{% endblock %}
+
+{% block logo %}Some new logo here{% endblock %}
+
+{% block group_menu %}Some new menu here{% endblock %}
+
+{% block content %}
+     <div class="row" id="add-form-row">
+        <div class="col-xs-12" id="edit-form-xs">
+            <div class="alert alert-warning">Some message here</div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>{% block panel_title %}Додати студента{% endblock %}</h2></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-5">
+                            <fieldset>
+                                <legend>Форма додавання студента</legend>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="student_name">Ім'я</label>
+                                        <input type="text" class="form-control" id="student_name" placeholder="Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="second_name">По-батькові</label>
+                                        <input type="text" class="form-control" id="student_second_name"
+                                               placeholder="Second name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="student_surname">Прізвище</label>
+                                        <input type="text" class="form-control" id="student_surname"
+                                               placeholder="Surname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ticket_number">Номер білету</label>
+                                        <input type="number" class="form-control" id="ticket_number"
+                                               placeholder="Ticket number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthday">Дата народження</label>
+                                        <input type="date" class="form-control" id="birthday"
+                                               placeholder="Birthday date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="foto">Фото</label>
+                                        <input type="file" id="foto-file">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="group">Група</label>
+                                        <input type="number" class="form-control" id="group" placeholder="Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="notice">Додаткові нотатки</label>
+                                        <textarea class="form-control" name="addition-notice" id="notice" cols="10"
+                                                  rows="5"></textarea>
+                                    </div>
+                                    <div class="panel panel-info">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-offset-2 col-xs-3">
+                                                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                                                </div>
+                                                <div class="col-xs-offset-1 col-xs-3">
+                                                    <button type="submit" class="btn btn-danger">Скасувати</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

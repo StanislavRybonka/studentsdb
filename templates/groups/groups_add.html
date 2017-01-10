@@ -1,1 +1,60 @@
-hello from group add page
+{% extends 'base.html' %}
+
+{% block meta_title %}Додати групу{% endblock %}
+
+{% block content %}
+    <div class="row" id="add_group-form-row">
+        <div class="col-xs-12" id="edit-form-xs">
+            <div class="alert alert-warning">Some message here</div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Додати групу</h2></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-5">
+                            <fieldset>
+                                <legend>Форма додавання групи</legend>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="group_name">Назва</label>
+                                        <input type="text" class="form-control" id="group_name" placeholder="Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="group_number">Номер групи</label>
+                                        <input type="number" class="form-control" id="group_number"
+                                               placeholder="Group number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="group_leader" class="checkbox-inline">
+                                            <input type="checkbox"><b>Староста</b>
+                                        </label>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="notice">Додаткові нотатки</label>
+                                        <textarea class="form-control" name="addition-notice" id="notice" cols="10"
+                                                  rows="5"></textarea>
+                                    </div>
+                                    <div class="panel panel-info">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-offset-2 col-xs-3">
+                                                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                                                </div>
+                                                <div class="col-xs-offset-1 col-xs-3">
+                                                    <button type="submit" class="btn btn-danger">Скасувати</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

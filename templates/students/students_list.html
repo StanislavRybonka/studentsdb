@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-{% load static from staticfiles %}
-{% block meta_title %}Студенти{% endblock %}
+{% load static from staticfiles %}<!-- Also load static -->
+{% block meta_title %}Студенти{% endblock %} <!-- Set meta title -->
+
 {% block stylesheet %}
 {% endblock %}
 
@@ -8,6 +9,7 @@
     <div class="row" id="content-columns">
         <div class="col-xs-12" id="content-column">
             <!-- Status Message -->
+            <!-- Uncomment in future -->
             {% comment 'Not used alert so far' %}
             <div class="alert alert-warning">Зміни скасовано</div>
             {% endcomment %}
@@ -29,13 +31,18 @@
                         <tr>
                             {% for student in students %}
                                 <td>{{ forloop.counter }}</td>
-                                <td><img src="{% static student.image %}" height="30" width="30" alt="foto"
+                                <td>
+                                    <img src="{% static student.image %}" height="30" width="30" alt="foto"
                                          class="img-responsive img-circle rotateimg90">
                                 </td>
-                                <td><a href="{% url 'students_edit' student.id %}"
-                                       title="Редагувати">{{ student.first_name }}</a></td>
-                                <td><a href="{% url 'students_edit' student.id %}"
-                                       title="Редагувати">{{ student.last_name }}</a></td>
+                                <td>
+                                    <a href="{% url 'students_edit' student.id %}"
+                                       title="Редагувати">{{ student.first_name }}</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'students_edit' student.id %}"
+                                       title="Редагувати">{{ student.last_name }}</a>
+                                </td>
                                 <td>{{ student.ticket }}</td>
                                 <td>
                                     <div class="dropdown">
