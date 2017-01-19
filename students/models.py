@@ -13,3 +13,10 @@ class Student(models.Model):
     photo = models.ImageField(blank=True, verbose_name='Foto', null=True)
     ticket = models.CharField(max_length=256, blank=False, verbose_name='Ticket')
     notes = models.TextField(blank=True, verbose_name='Additional notices')
+
+    class Meta(object):
+        verbose_name = 'Student'
+        verbose_name_plural = 'Students'
+
+    def __unicode__(self):
+        return '{} {}'.format(self.first_name, self.last_name)

@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from .settings import MEDIA_ROOT, DEBUG, MEDIA_URL
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('students.urls'))
 ]
+# Set media files folder only for development
+if DEBUG:
+    urlpatterns += [] + static(MEDIA_URL, document_root=MEDIA_ROOT)
