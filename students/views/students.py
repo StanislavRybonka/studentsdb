@@ -1,20 +1,24 @@
 from django.shortcuts import render
 from django.views import generic
 from ..models import Student
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Manage Students
-class StudentsListView(generic.TemplateView):
-    def get(self, request, *args, **kwargs):
+class StudentsListView(generic.ListView):
+    model = Student
+    paginate_by = 5
+    template_name = 'students/students_list.html'
+
+    def get_queryset(self):
         students = Student.objects.order_by('last_name').all()
 
-        #Try to order students list
-        order_by = request.GET.get('order_by', '')
+        order_by = self.request.GET.get('order_by', '')
         if order_by in ('last_name', 'first_name', 'ticket'):
             students = students.order_by(order_by)
-            if request.GET.get('reverse', '') == '1':
+            if self.request.GET.get('reverse', '') == '1':
                 students = students.reverse()
-        return render(request, 'students/students_list.html', {'students': students})
+        return students
 
 
 class StudentsAddView(generic.TemplateView):
