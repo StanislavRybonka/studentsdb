@@ -53,5 +53,6 @@ local_settings.py
 .idea/
 # all log files
 *.log*
+*.venv*
 
 
