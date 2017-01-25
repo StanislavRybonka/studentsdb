@@ -14,7 +14,11 @@
             <div class="alert alert-warning">Зміни скасовано</div>
             {% endcomment %}
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>База студентів</h2></div>
+                <div class="panel-heading"><h2>База студентів</h2>
+                      <div class="text-right">
+                        <a href="{% url 'students_add' %}" class="btn btn-primary">Додати студента</a>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
                         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
@@ -114,17 +118,19 @@
                             </tr>
                         {% endfor %}
                         </tbody>
+                    <div class="test"></div>
                     </table>
-                    <div class="text-right">
-                        <a href="{% url 'students_add' %}" class="btn btn-primary">Додати студента</a>
-                    </div>
+                    <a href="#" id="load_more">Load more</a>
                 </div>
             </div>
-            {% include 'snippets/pagination.html' %}
+            <div class="text-center">
+                {% include 'snippets/pagination.html' %}
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block javascript %}
+    <script type="text/javascript" src="{{ ABSOLUTE_URL }}{% static 'js/services.js' %}"></script>
 
 {% endblock %}

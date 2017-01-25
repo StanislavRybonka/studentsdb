@@ -1,24 +1,33 @@
 from django.shortcuts import render
 from django.views import generic
+from django.http import HttpResponse
 from ..models import Student
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 
 
 # Manage Students
-class StudentsListView(generic.ListView):
+class StudentsListView(generic.View):
     model = Student
-    paginate_by = 5
+    # paginate_by = 20
     template_name = 'students/students_list.html'
 
-    def get_queryset(self):
-        students = Student.objects.order_by('last_name').all()
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            var = 10
+            return JsonResponse({
+                'data':var
+            })
+        return render(request, self.template_name, { 'white_ip_list': 2})
 
-        order_by = self.request.GET.get('order_by', '')
-        if order_by in ('last_name', 'first_name', 'ticket'):
-            students = students.order_by(order_by)
-            if self.request.GET.get('reverse', '') == '1':
-                students = students.reverse()
-        return students
+    # def get_queryset(self):
+    #     students = Student.objects.order_by('last_name').all()
+    #
+    #     order_by = self.request.GET.get('order_by', '')
+    #     if order_by in ('last_name', 'first_name', 'ticket'):
+    #         students = students.order_by(order_by)
+    #         if self.request.GET.get('reverse', '') == '1':
+    #             students = students.reverse()
+    #     return students
 
 
 class StudentsAddView(generic.TemplateView):
