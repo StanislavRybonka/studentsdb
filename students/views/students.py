@@ -29,7 +29,7 @@ class StudentsListView(generic.ListView):
             context = super(StudentsListView, self).get_context_data(**kwargs)
             data = serializers.serialize("json", students)
             return JsonResponse({
-                'data':data
+                'data': data
             })
         return super(StudentsListView, self).get(request, **kwargs)
 

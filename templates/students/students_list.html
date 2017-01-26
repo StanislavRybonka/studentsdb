@@ -70,10 +70,10 @@
                             </tr>
                             </thead>
                         {% endwith %}
-                        <tbody>
+                        <tbody class="test">
 
                         {% for student in object_list %}
-                            <tr>
+                            <tr class="test">
                                 <td>{{ forloop.counter }}</td>
                                 <td>
                                     {% if student.photo %}
@@ -118,7 +118,7 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-                    <div class="test"></div>
+
                     </table>
                     <a href="#" id="load_more">Load more</a>
                 </div>
