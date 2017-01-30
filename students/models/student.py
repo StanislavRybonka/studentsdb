@@ -13,6 +13,7 @@ class Student(models.Model):
     photo = models.ImageField(blank=True, verbose_name='Foto', null=True)
     ticket = models.CharField(max_length=256, blank=False, verbose_name='Ticket')
     notes = models.TextField(blank=True, verbose_name='Additional notices')
+    student_group = models.ForeignKey('Group', verbose_name='Group', blank=False, null=True, on_delete=models.PROTECT)
 
     class Meta(object):
         verbose_name = 'Student'

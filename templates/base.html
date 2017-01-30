@@ -63,6 +63,9 @@
                     <li class="{% if url_name == 'groups_list' %}active{% endif %}">
                         <a href="{% url 'groups_list' %}">Групи</a>
                     </li>
+                <li class="{% if url_name == 'exams_list' %}active{% endif %}">
+                    <a href="{% url 'exams_list' %}">Екзамени</a>
+                </li>
                 </ul>
             {% endwith %}
         </div>

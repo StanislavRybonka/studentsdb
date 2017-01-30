@@ -1,37 +1,24 @@
 from django.shortcuts import render
 from django.views import generic
-from django.http import HttpResponse
-from ..models import Student
-from django.http import JsonResponse
-from django.views.generic.list import MultipleObjectMixin
-from django.conf import settings
-from django.shortcuts import render_to_response
-import json
-from django.core import serializers
+from ..models.student import Student
 
 
 # Manage Students
 class StudentsListView(generic.ListView):
     model = Student
-    paginate_by = 20
+    paginate_by = 5
     template_name = 'students/students_list.html'
 
-    def get(self, request, **kwargs):
-        students = Student.objects.order_by('last_name').all()
+    def get_queryset(self):
+        queryset = Student.objects.order_by('last_name').all()
 
         order_by = self.request.GET.get('order_by', '')
         if order_by in ('last_name', 'first_name', 'ticket'):
-            students = students.order_by(order_by)
+            students = queryset.order_by(order_by)
             if self.request.GET.get('reverse', '') == '1':
-                students = students.reverse()
-        if request.is_ajax():
-            self.object_list = self.get_queryset()
-            context = super(StudentsListView, self).get_context_data(**kwargs)
-            data = serializers.serialize("json", students)
-            return JsonResponse({
-                'data': data
-            })
-        return super(StudentsListView, self).get(request, **kwargs)
+                queryset = students.reverse()
+
+        return queryset
 
 
 class StudentsAddView(generic.TemplateView):

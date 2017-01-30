@@ -34,7 +34,7 @@
                                         {% endif %}
                                     </a>
                                 </th>
-                                <th>Фото</th>
+                                <th class="text-primary">Фото</th>
                                 <th>
                                     <a href="{% url 'students_list' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
                                         Ім*я
@@ -66,14 +66,14 @@
                                         {% endif %}
                                     </a>
                                 </th>
-                                <th>Дія</th>
+                                <th class="text-primary">Дія</th>
                             </tr>
                             </thead>
                         {% endwith %}
-                        <tbody class="test">
+                        <tbody>
 
                         {% for student in object_list %}
-                            <tr class="test">
+                            <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td>
                                     {% if student.photo %}
@@ -95,7 +95,7 @@
                                 <td>{{ student.ticket }}</td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button"
+                                        <button class="btn btn-default dropdown-toggle " type="button"
                                                 data-toggle="dropdown">Дія
                                             <span class="caret"></span>
                                         </button>
@@ -118,9 +118,7 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-
                     </table>
-                    <a href="#" id="load_more">Load more</a>
                 </div>
             </div>
             <div class="text-center">
