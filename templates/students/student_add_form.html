@@ -5,12 +5,15 @@
 {% block logo %}Some new logo here{% endblock %}
 
 {% block group_menu %}Some new menu here{% endblock %}
+{% block status_message %}
+      <div class="alert alert-warning">Please fix form errors</div>
+    {% if  errors %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
      <div class="row" id="add-form-row">
         <div class="col-xs-12" id="edit-form-xs">
-            <div class="alert alert-warning">Some message here</div>
-
             <div class="panel panel-default">
                 <div class="panel-heading"><h2>{% block panel_title %}Додати студента{% endblock %}</h2></div>
                 <div class="panel-body">
@@ -18,38 +21,50 @@
                         <div class="col-xs-offset-3 col-xs-5">
                             <fieldset>
                                 <legend>Форма додавання студента</legend>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="student_name">Ім'я</label>
-                                        <input type="text" class="form-control" id="student_name" placeholder="Name">
+                                <form action="{% url 'students_add' %}" method="POST">
+                                {% csrf_token %}
+                                    <div class="form-group {% if errors.first_name %}has-error{% endif %}">
+                                        <label for="student_name">Ім'я*</label>
+                                        <input type="text" class="form-control" name="first_name" value="{{ request.POST.first_name }}" id="student_name" placeholder="Name">
+                                        <span class="text-danger">{{ errors.first_name }}</span>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group {% if errors.middle_name %}has-error{% endif %}">
                                         <label for="second_name">По-батькові</label>
-                                        <input type="text" class="form-control" id="student_second_name"
+                                        <input type="text" class="form-control" name="middle_name" value="{{ request.POST.middle_name }}" id="student_second_name"
                                                placeholder="Second name">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="student_surname">Прізвище</label>
-                                        <input type="text" class="form-control" id="student_surname"
+                                    <div class="form-group {% if errors.last_name %}has-error{% endif %}">
+                                        <label for="student_surname">Прізвище*</label>
+                                        <input type="text" class="form-control" name="last_name" value="{{ request.POST.last_name }}" id="student_surname"
                                                placeholder="Surname">
+                                         <span class="text-danger">{{ errors.last_name }}</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="ticket_number">Номер білету</label>
-                                        <input type="number" class="form-control" id="ticket_number"
+                                    <div class="form-group {% if errors.ticket %}has-error{% endif %}">
+                                        <label for="ticket_number">Номер білету*</label>
+                                        <input type="number" name="ticket" value="{{ request.POST.ticket }}" class="form-control" id="ticket_number"
                                                placeholder="Ticket number">
+                                          <span class="text-danger">{{ errors.ticket }}</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="birthday">Дата народження</label>
-                                        <input type="date" class="form-control" id="birthday"
+                                    <div class="form-group {% if errors.birthday %}has-error{% endif %}">
+                                        <label for="birthday">Дата народження*</label>
+                                        <input type="date" name="birthday" class="form-control" value="{{ request.POST.birthday }}" id="birthday"
                                                placeholder="Birthday date">
+                                           <span class="text-danger">{{ errors.birthday }}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Фото</label>
-                                        <input type="file" id="foto-file">
+                                        <input name="photo" type="file" id="foto-file">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="group">Група</label>
-                                        <input type="number" class="form-control" id="group" placeholder="Number">
+                                    <div class="form-group {% if errors.student_group %}has-error{% endif %}">
+                                        <label for="group">Група*</label>
+                                        <select name="student_group" id="student_group" class="form-control">
+
+                                            <option value="">Choose group</option>
+                                             {% for group in groups %}
+                                            <option value="{{ group.pk }}" {% if group.id  == request.POST.student_group|add:0%}selected="1"{% endif %}>{{ group.title }}</option>
+                                          {% endfor %}
+                                        </select>
+                                        <span class="text-danger">{{ errors.student_group }}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="notice">Додаткові нотатки</label>
@@ -60,10 +75,10 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-xs-offset-2 col-xs-3">
-                                                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                                                    <button type="submit" name="add_button" class="btn btn-primary">Зберегти</button>
                                                 </div>
                                                 <div class="col-xs-offset-1 col-xs-3">
-                                                    <button type="submit" class="btn btn-danger">Скасувати</button>
+                                                    <button type="submit" name="cancel_button" class="btn btn-link">Скасувати</button>
                                                 </div>
                                             </div>
                                         </div>

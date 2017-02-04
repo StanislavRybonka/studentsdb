@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+
 class Student(models.Model):
     '''Student model'''
 
@@ -12,7 +13,7 @@ class Student(models.Model):
     birthday = models.DateField(blank=False, verbose_name='Date of birthday', null=True)
     photo = models.ImageField(blank=True, verbose_name='Foto', null=True)
     ticket = models.CharField(max_length=256, blank=False, verbose_name='Ticket')
-    notes = models.TextField(blank=True, verbose_name='Additional notices')
+    notes = models.TextField(blank=True, verbose_name='Additional notices',null=True)
     student_group = models.ForeignKey('Group', verbose_name='Group', blank=False, null=True, on_delete=models.PROTECT)
 
     class Meta(object):
