@@ -1,6 +1,9 @@
-from django.shortcuts import render
 from django.views import generic
 from ..models.group import Group
+from django.contrib.messages.views import SuccessMessageMixin
+from ..forms import GroupForm
+from django.shortcuts import reverse
+from django.contrib import messages
 
 
 # Manage Groups
@@ -20,19 +23,25 @@ class GroupsListView(generic.ListView):
         return queryset
 
 
-class GroupsAddView(generic.TemplateView):
+class GroupsAddView(SuccessMessageMixin, generic.CreateView):
     template_name = 'groups/groups_add.html'
+    model = Group
+    form_class = GroupForm
+    success_url = '/groups'
+    success_message = '%(title)s Added to group list!'
 
 
-class GroupsEditView(generic.TemplateView):
+class GroupsEditView(SuccessMessageMixin, generic.UpdateView):
+    model = Group
     template_name = 'groups/groups_edit.html'
+    form_class = GroupForm
+    success_url = '/groups'
+    success_message = '%(title)s Updated!'
 
-    def groups_edit(self, request, gid):
-        return render(self.request, gid)
 
+class GroupsDeleteView(generic.DeleteView):
+    template_name = 'groups/groups_delete_confirm.html'
+    model = Group
 
-class GroupsDeleteView(generic.TemplateView):
-    template_name = 'groups/groups_delete.html'
-
-    def groups_delete(self, request, gid):
-        return render(self.request, gid)
+    def get_success_url(self):
+        return reverse('groups_list', messages.add_message(self.request, messages.SUCCESS, 'Group was deleted!'))

@@ -1,40 +1,26 @@
 {% extends 'base.html' %}
-{% load  staticfiles i18n bootstrap3 %}
-{% block meta_title %}Додати студента{% endblock %}
-
-{% block logo %}Some new logo here{% endblock %}
-
-{% block group_menu %}Some new menu here{% endblock %}
+{% load staticfiles crispy_forms_tags bootstrap3 %}
+{% block meta_title %}Редагувати екзамен{% endblock %}
 
 {% block content %}
-    <div class="row" id="add-form-row">
+    <div class="row" id="edit-form-row">
         <div class="col-xs-12" id="edit-form-xs">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>{% block panel_title %}Додати студента{% endblock %}</h2></div>
+                <div class="panel-heading"><h2>{{ object.discipline_name }}</h2></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-5">
                             <fieldset>
-                                <legend>Форма додавання студента</legend>
+                                <legend>Форма редагування екзамена</legend>
 
-                                <form method="post" action="{% url 'students_add' %}" enctype="multipart/form-data">
+                                <form method="post" action="{% url 'exams_edit' object.pk %}"
+                                      enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {% bootstrap_form_errors form non_fields %}
+                                    {% bootstrap_field form.discipline_name %}
+                                    {% bootstrap_field form.date %}
+                                    {% bootstrap_field form.teacher_name %}
+                                    {% bootstrap_field form.group_id %}
 
-                                    {% bootstrap_field form.first_name %}
-
-                                    {% bootstrap_field form.last_name %}
-
-                                    {% bootstrap_field form.middle_name %}
-
-                                    {% bootstrap_field form.birthday %}
-
-                                    {% bootstrap_field form.photo %}
-
-                                    {% bootstrap_field form.ticket %}
-
-                                    {% bootstrap_field form.notes %}
-                                    {% bootstrap_field form.student_group %}
                                     <!-- To do buttons with bootstrap3 -->
                                     <div class="row">
                                         <div class="col-xs-offset-2 col-xs-3">
@@ -51,9 +37,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
 {% endblock %}

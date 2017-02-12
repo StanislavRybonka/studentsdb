@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-
 class Group(models.Model):
     '''Group model'''
 
@@ -15,7 +14,7 @@ class Group(models.Model):
         verbose_name = 'Group'
         verbose_name_plural = 'Groups'
 
-    def __unicode__(self):
+    def __str__(self):
         if self.leader:
             return '{}({}{})'.format(self.title, self.leader.first_name, self.leader.last_name)
         else:

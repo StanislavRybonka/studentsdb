@@ -1,5 +1,5 @@
 <!-- Load static files, before need customize DIRS, for children's templates need do this also -->
-{% load staticfiles i18n   %}
+{% load staticfiles i18n %}
 
 <!doctype html>
 <html lang="en">
@@ -63,19 +63,19 @@
                     <li class="{% if url_name == 'groups_list' %}active{% endif %}">
                         <a href="{% url 'groups_list' %}">Групи</a>
                     </li>
-                <li class="{% if url_name == 'exams_list' %}active{% endif %}">
-                    <a href="{% url 'exams_list' %}">Екзамени</a>
-                </li>
+                    <li class="{% if url_name == 'exams_list' %}active{% endif %}">
+                        <a href="{% url 'exams_list' %}">Екзамени</a>
+                    </li>
+                    <li class="{% if url_name == 'contact_form' %}active{% endif %}">
+                        <a href="{% url 'contact-admin' %}">Contact us</a>
+                    </li>
                 </ul>
             {% endwith %}
         </div>
     </div>
     <!------ End Subheader ------>
-{% block status_message %}
-    {% if request.GET.status_message %}
-     <div class="alert alert-warning">{{ request.GET.status_message }}</div>
-    {% endif %}
-{% endblock %}
+    {% block status_message %}
+    {% endblock %}
 
     <!-- Main content for future different pages -->
     {% block content %}

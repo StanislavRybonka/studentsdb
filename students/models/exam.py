@@ -11,7 +11,7 @@ class Exam(models.Model):
         verbose_name = 'Exam'
         verbose_name_plural = 'Exams'
 
-    def __unicode__(self):
+    def __str__(self):
         return '{}'.format(self.discipline_name)
 
 
@@ -25,5 +25,5 @@ class ExamResult(models.Model):
         verbose_name = 'Exam Result'
         verbose_name_plural = 'Exam Results'
 
-    def __unicode__(self):
+    def __str__(self):
         return '{}'.format(self.exam_id)

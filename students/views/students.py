@@ -1,17 +1,27 @@
-from django.shortcuts import render
 from django.views import generic
 from ..models.student import Student
-from ..models.group import Group
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
-from datetime import datetime
+from django.core.urlresolvers import reverse, reverse_lazy
+from ..forms import StudentForm
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 
 # Manage Students
 class StudentsListView(generic.ListView):
     model = Student
-    paginate_by = 5
+    paginate_by = 10
     template_name = 'students/students_list.html'
+
+    def get_context_data(self, **kwargs):
+        # This method adds extra variables to template
+        # get original context data from parent class
+        context = super(StudentsListView, self).get_context_data(**kwargs)
+
+        # tell template not to show logo on a page
+        context['show_logo'] = False
+
+        # return context mapping
+        return context
 
     def get_queryset(self):
         queryset = Student.objects.order_by('last_name').all()
@@ -25,99 +35,40 @@ class StudentsListView(generic.ListView):
         return queryset
 
 
-def student_add(request):
-    # If form is submited:
-    if request.method == 'POST':
-        if request.POST.get('add_button') is not None:
-            # To do validate
-            errors = {}
+class StudentAddView(SuccessMessageMixin, generic.CreateView):
+    template_name = 'students/student_add_form.html'
+    form_class = StudentForm
+    model = Student
+    success_url = reverse_lazy('students_list')
+    success_message = '%(first_name)s %(last_name)s Successfull added to datebase!'
 
-            # prepare dict here for  future data - info
-            data = {'middle_name': request.POST.get('middle_name'), 'notes': request.POST.get('notes')}
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
 
-            # validate user inputs
-            first_name = request.POST.get('first_name', '').strip()
-            if not first_name:
-                errors['first_name'] = 'Name is demand'
-            else:
-                data['first_name'] = first_name
-
-            #delete free space with strip()
-            last_name = request.POST.get('last_name', '').strip()
-            if not last_name:
-                errors['last_name'] = "Last name is demand"
-            else:
-                data['last_name'] = last_name
-
-            birthday = request.POST.get('birthday', '').strip()
-            if not birthday:
-                errors['birthday'] = 'Birthday field is demand'
-            else:
-                try:
-                    # set format for date
-                    datetime.strptime(birthday, '%Y-%m-%d')
-
-                except Exception:
-
-                    errors['birthday'] = 'Enter right format'
-                else:
-                    data['birthday'] = birthday
-
-            ticket = request.POST.get('ticket', '').strip()
-
-            if not ticket:
-                errors['ticket'] = 'Ticket field is demand'
-            else:
-                data['ticket'] = ticket
-
-            student_group = request.POST.get('student_group', '').strip()
-            if not student_group:
-                errors['student_group'] = 'Group is demand'
-            else:
-                # For Model with Foreight key we use second tricks
-                groups = Group.objects.filter(pk=student_group)
-                if len(groups) != 1:
-                    errors['student_group'] = 'Choose right group'
-                else:
-                    data['student_group'] = groups[0]
-
-            photo = request.FILES.get('photo')
-            if photo:
-                data['photo'] = photo
-
-            if not errors:
-                # after all we take dat and save it
-                student = Student(**data)
-                # save it to db
-                student.save()
-
-                # redirect user to students_list, pay atention on status message, send it via GET
-                return HttpResponseRedirect('%s?status_message=Successful added'% reverse('students_list'))
-            else:
-                # render form with errors and previous user's input
-                return render(request, 'students/student_add_form.html',
-                              {'groups': Group.objects.all().order_by('title'), 'errors': errors})
-
-        elif request.POST.get('cancel_button') is not None:
-            # redirect to students list on cancel button
-            return HttpResponseRedirect('%s?status_message=Canceled'% reverse('students_list'))
-    else:
-        # initial form render
-        return render(request, 'students/student_add_form.html', {'groups': Group.objects.all().order_by('title')})
+        # To do notify student by email that he is added to group
+        return super(StudentAddView, self).form_valid(form)
 
 
-class StudentsEditView(generic.TemplateView):
+class StudentsEditView(SuccessMessageMixin, generic.UpdateView):
     template_name = "students/students_edit_form.html"
+    model = Student
+    form_class = StudentForm
+    success_url = reverse_lazy('students_list')
+    success_message = '%(first_name)s %(last_name)s Successfull updated!'
 
-    def get_context_data(self, **kwargs):
-        context = super(StudentsEditView, self).get_context_data(**kwargs)
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
 
-        context['sid'] = self.kwargs.get('sid')
-        return context
+        # To do notify student by email that he is added to group
+        return super(StudentsEditView, self).form_valid(form)
 
 
-class StudentsDeleteView(generic.TemplateView):
-    template_name = 'students/students_delete.html'
+class StudentsDeleteView(generic.DeleteView):
+    model = Student
+    template_name = 'students/students_confirm_delete.html'
 
-    def students_delete(self, request, sid):
-        return render(self.request, sid)
+    def get_success_url(self):
+        return reverse('students_list',
+                       messages.add_message(self.request, messages.SUCCESS, 'Student successful deleted'))

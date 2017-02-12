@@ -1,42 +1,74 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load staticfiles bootstrap3 %}
 
 {% block meta_title %}Exams{% endblock %}
-{% block stylesheet %}
 
+{% block status_message %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}
+                <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="row" id="count-visits-row">
         <div class="col-xs-12" id="count-visits-xs">
-            <div class="alert alert-warning">Some message here</div>
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Exams List</h2></div>
+                <div class="panel-heading"><h2>Exams List</h2>
+                    <div class="text-right">
+                        <a href="{% url 'exams_add' %}" class="btn btn-primary">Add new exam</a>
+                    </div>
+
+                </div>
                 <div class="panel-body">
-                   <table class="table table-hover table-striped">
-                       <thead>
-                      <tr>
-                          <th>#</th>
-                          <th>Discipline</th>
-                          <th>Date</th>
-                          <th>Examinator</th>
-                          <th>Group</th>
-                      </tr>
-                       <tbody>
-                   {% for key in object_list %}
-                   <tr>
-                   <td>{{ forloop.counter }}</td>
-                       <td>{{ key.discipline_name }}</td>
-                       <td>{{ key.date }}</td>
-                       <td>{{ key.teacher_name }}</td>
-                       <td>{{ key.group_id }}</td>
-                   </tr>
-                   {% endfor %}
-                   </tbody>
-                       </thead>
-
-                   </table>
-
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Discipline</th>
+                            <th>Date</th>
+                            <th>Examinator</th>
+                            <th>Group</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key in object_list %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ key.discipline_name }}</td>
+                                <td>{{ key.date }}</td>
+                                <td>{{ key.teacher_name }}</td>
+                                <td>{{ key.group_id }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle " type="button"
+                                                data-toggle="dropdown">Дія
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1"
+                                                   href="{% url 'exams_edit' key.pk %}">Редагувати</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1"
+                                                   href="{% url 'exams_delete' key.pk %}">Видалити</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
             {% include 'snippets/pagination.html' %}

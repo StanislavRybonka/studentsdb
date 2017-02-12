@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('students.urls'))
+    url(r'', include('students.urls')),
+
 ]
 # Set media files folder only for development
 if DEBUG:

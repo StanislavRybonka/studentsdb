@@ -54,5 +54,6 @@ local_settings.py
 # all log files
 *.log*
 *.venv*
+media
 
 

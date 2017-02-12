@@ -1,21 +1,31 @@
 {% extends 'base.html' %}
-{% load  staticfiles  %}<!-- Also load static -->
+{% load  staticfiles bootstrap3  %}<!-- Also load static -->
 {% block meta_title %}Студенти{% endblock %} <!-- Set meta title -->
 
 {% block stylesheet %}
+{% endblock %}
+
+{% block status_message %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}
+                <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="row" id="content-columns">
         <div class="col-xs-12" id="content-column">
             <!-- Status Message -->
-            <!-- Uncomment in future -->
-            {% comment 'Not used alert so far' %}
-            <div class="alert alert-warning">Зміни скасовано</div>
-            {% endcomment %}
             <div class="panel panel-default">
                 <div class="panel-heading"><h2>База студентів</h2>
-                      <div class="text-right">
+                    <div class="text-right">
                         <a href="{% url 'students_add' %}" class="btn btn-primary">Додати студента</a>
                     </div>
                 </div>
@@ -78,7 +88,7 @@
                                 <td>
                                     {% if student.photo %}
                                         <img src="{{ student.photo.url }}" height="30" width="30" alt="foto"
-                                             class="img-responsive img-circle rotateimg90">
+                                             class="img-responsive img-circle rotateimg60">
                                     {% else %}
                                         <img src="{% static 'img/index.jpeg' %}" height="30" width="30" alt="foto"
                                              class="img-responsive img-circle rotateimg60">
