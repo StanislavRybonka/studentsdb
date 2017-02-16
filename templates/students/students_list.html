@@ -129,10 +129,26 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        <div class="pagination">
+                        <span class="step-links">
+                            {% if object_list.has_previous %}
+                                <a href="?page={{ object_list.previous_page_number }}">
+                                    <input type="button" class="btn btn-primary btn-xs" value="Previously">
+                                </a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                            </span>
+                            {% if object_list.has_next %}
+                                <a href="?page={{ object_list.next_page_number }}">
+                                    <input type="button" class="btn btn-primary btn-xs" value="Next">
+                                </a>
+                            {% endif %}
+                        </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="text-center">
-                {% include 'snippets/pagination.html' %}
             </div>
         </div>
     </div>
@@ -140,5 +156,4 @@
 
 {% block javascript %}
     <script type="text/javascript" src="{{ ABSOLUTE_URL }}{% static 'js/services.js' %}"></script>
-
 {% endblock %}

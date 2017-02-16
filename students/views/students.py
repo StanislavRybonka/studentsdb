@@ -4,35 +4,47 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from ..forms import StudentForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 # Manage Students
-class StudentsListView(generic.ListView):
-    model = Student
-    paginate_by = 10
+def students_list(request):
     template_name = 'students/students_list.html'
 
-    def get_context_data(self, **kwargs):
-        # This method adds extra variables to template
-        # get original context data from parent class
-        context = super(StudentsListView, self).get_context_data(**kwargs)
+    # take students list queryset
+    students = Student.objects.all()
 
-        # tell template not to show logo on a page
-        context['show_logo'] = False
+    # check request method is GET
+    if request.method == 'GET':
+        order_by_data = request.GET.get('order_by')
+        order_by_reverse = request.GET.get('reverse')
 
-        # return context mapping
-        return context
+        # if method is GET, need receive arguments for order by
+        if order_by_data:
+            students = students.order_by(order_by_data)
 
-    def get_queryset(self):
-        queryset = Student.objects.order_by('last_name').all()
+        if order_by_reverse:
+            students = students.order_by(order_by_data).reverse()
 
-        order_by = self.request.GET.get('order_by', '')
-        if order_by in ('last_name', 'first_name', 'ticket'):
-            students = queryset.order_by(order_by)
-            if self.request.GET.get('reverse', '') == '1':
-                queryset = students.reverse()
+    # add simple pagination
+    paginator = Paginator(students, 10)
 
-        return queryset
+    page = request.GET.get('page')
+
+    try:
+        students = paginator.page(page)
+
+    except PageNotAnInteger:
+        students = paginator.page(1)
+
+    except EmptyPage:
+        students = paginator.page(paginator.num_pages)
+
+    # return value according to order_by data
+
+    return render(request, template_name, {'object_list': students})
 
 
 class StudentAddView(SuccessMessageMixin, generic.CreateView):
