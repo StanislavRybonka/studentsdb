@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Student, Group, Journal, Exam
 from .models.exam import ExamResult
-from django.core.urlresolvers import reverse
 from django.forms import ModelForm, ValidationError
 
 
@@ -9,10 +8,14 @@ class StudentFormAdmin(ModelForm):
     def clean_student_group(self):
         """Check if student is leader in any group
         If yes, then ensure it's the same as selected group"""
+
         # get group where current student is leader
-        groups = Group.objects.filter(leader=self.instance)
-        if len(groups) > 0 and self.cleaned_data['student_group'] != [0]:
-            raise ValidationError('Student are leader in other group', code='invalid')
+        groups = Group.objects.filter(leader=self.instance).first()
+
+        # check if student leader anywhere
+        if groups:
+            if self.cleaned_data.get('student_group') != groups:
+                raise ValidationError('Student are leader in other group', code='invalid')
 
         return self.cleaned_data['student_group']
 
@@ -26,13 +29,32 @@ class StudentAdmin(admin.ModelAdmin):
     search_fields = ['last_name', 'first_name', 'middle_name', 'ticket', 'notes']
     form = StudentFormAdmin
 
-    def get_view_on_site_url(self, obj=None):
-        return reverse('students_edit', kwargs={'pk': obj.id})
+
+class GroupFormAdmin(ModelForm):
+    def clean_leader(self):
+        # take group_id from students table
+
+        student_instance = self.cleaned_data.get('leader')
+
+        if student_instance.student_group_id == self.instance.id:
+
+            return student_instance
+
+        else:
+            self.add_error('leader', ValidationError('This student from other group.'))
+
+
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ['title', 'leader']
+    list_editable = ['leader']
+    admin.site.empty_value_display = ['None']
+    search_fields = ['title']
+    form = GroupFormAdmin
 
 
 # Register your models here.
 admin.site.register(Student, StudentAdmin)
-admin.site.register(Group)
+admin.site.register(Group, GroupAdmin)
 admin.site.register(Journal)
 admin.site.register(Exam)
 admin.site.register(ExamResult)

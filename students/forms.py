@@ -87,6 +87,18 @@ class StudentForm(forms.ModelForm):
         else:
             self.add_error('last_name', ValidationError('First litter should be Capitalize'))
 
+    def clean_student_group(self):
+        # take group_id from students table
+
+        groups = Group.objects.filter(leader=self.instance).first()
+
+        # check if student leader anywhere
+        if groups:
+            if self.cleaned_data.get('student_group') != groups:
+                raise ValidationError('Student are leader in other group', code='invalid')
+
+        return self.cleaned_data['student_group']
+
 
 # Group FORM
 
@@ -96,6 +108,19 @@ class GroupForm(forms.ModelForm):
         fields = ['title', 'leader', 'notes']
 
         # To do, add some validation here if need
+
+    def clean_leader(self):
+
+        # take group_id from students table
+
+        student_instance = self.cleaned_data.get('leader')
+
+        if student_instance:
+
+            if student_instance.student_group_id == self.instance.id:
+                return student_instance
+            else:
+                self.add_error('leader', ValidationError('This student from other group.'))
 
 
 # Exam Form
