@@ -1,9 +1,11 @@
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), ".."),
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -30,9 +32,18 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap3',
     'contact_form',
+    'djangobower',
+    'django_ajax',
+    'django_ajax',
 
 ]
+BOWER_INSTALLED_APPS = (
+    'js-cookie',
+    'jquery-form',
+
+)
 SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -45,6 +56,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'studentsdb.urls'
+
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
 
 TEMPLATES = [
     {

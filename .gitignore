@@ -55,5 +55,6 @@ local_settings.py
 *.log*
 *.venv*
 media
+components*
 
 
