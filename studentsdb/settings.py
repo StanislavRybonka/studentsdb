@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'contact_form',
     'djangobower',
     'django_ajax',
-    'django_ajax',
+    'datetimewidget',
+
 
 ]
 BOWER_INSTALLED_APPS = (
@@ -193,7 +194,7 @@ MEDIA_URL = '/media/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, '../static'),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 # Simplified static file serving.

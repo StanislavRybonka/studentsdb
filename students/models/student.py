@@ -28,3 +28,5 @@ class Student(models.Model):
         return '{} {}'.format(self.first_name, self.last_name)
 
 
+
+

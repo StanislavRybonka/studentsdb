@@ -1,47 +1,24 @@
 {% load i18n %}
 
 {% if is_paginated %}
-    <nav>
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
+    {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+        <nav>
+            <ul class="pagination">
                 <li>
-                    <a href="?{% pagination_url request page_obj.previous_page_number %}">
-                        <span>{% trans 'Previous' %}</span>
-                    </a>
+                    <a href="?page=1{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}{% if cur_month %}&amp;month={{ cur_month }}{% endif %}">&laquo;</a>
                 </li>
-            {% else %}
-                <li class="disabled">
-                    <a href="#">
-                        <span>{% trans 'Previous' %}</span>
-                    </a>
-                </li>
-            {% endif %}
-
-            {% for page in page_obj|pagination_range %}
-                <li {% if page == page_obj.number %}class="active"{% endif %}>
-                    {% if page %}
-                        <a href="?{% pagination_url request page %}">
-                            {{ page }}
-                        </a>
-                    {% else %}
-                        <a href="#">...</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-
-            {% if page_obj.has_next %}
+                {% for p in paginator.page_range %}
+                    <li {% if object_list.number == p %}class="active"{% endif %}>
+                        <a href="?page=
+                                {{ p }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}{% if cur_month %}&amp;month={{ cur_month }}{% endif %}">{{ p }}</a>
+                    </li>
+                {% endfor %}
                 <li>
-                    <a href="?{% pagination_url request page_obj.next_page_number %}">
-                        <span>{% trans 'Next' %}</span>
-                    </a>
+                    <a href="?page=
+                            {{ paginator.num_pages }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}{% if cur_month %}&amp;month={{ cur_month }}{% endif %}">
+                        &raquo;</a>
                 </li>
-            {% else %}
-                <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
-                    <a href="#">
-                        <span>{% trans 'Next' %}</span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+            </ul>
+        </nav>
+    {% endwith %}
 {% endif %}

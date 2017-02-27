@@ -12,6 +12,7 @@ from studentsdb.local_settings import MANAGERS
 from .models.group import Group
 
 from .models.exam import Exam
+from .models.journal import Journal
 
 
 # Students FORM
@@ -129,3 +130,16 @@ class ExamForm(forms.ModelForm):
     class Meta:
         model = Exam
         fields = ['discipline_name', 'date', 'teacher_name', 'group_id']
+
+
+
+#Journal Form
+
+from datetimewidget.widgets import DateTimeWidget
+class JournalForm(forms.ModelForm):
+    class Meta:
+        model = Journal
+        fields = ['student','date','status']
+        widgets = {
+            'date': DateTimeWidget(usel10n=True, bootstrap_version=3)
+        }
