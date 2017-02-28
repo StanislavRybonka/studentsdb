@@ -25,22 +25,22 @@
                 <div class="panel-heading"><h2>Групи</h2></div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
-                       {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
-                        <thead>
-                        <tr>
-                            <th class="text-primary">№</th>
-                            <th>
-                             <a href="{% url 'groups_list' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">
-                                       Назва
+                        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+                            <thead>
+                            <tr>
+                                <th class="text-primary">№</th>
+                                <th>
+                                    <a href="{% url 'groups_list' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">
+                                        Назва
                                         {% if order_by == 'title' and reverse != '1' %}&uarr;
 
                                             {% elif order_by == 'title' and reverse == '1' %}&darr;
 
                                         {% endif %}
                                     </a>
-                            </th>
-                            <th>
-                                 <a href="{% url 'groups_list' %}?order_by=leader{% if order_by == 'leader' and reverse != '1' %}&amp;reverse=1{% endif %}">
+                                </th>
+                                <th>
+                                    <a href="{% url 'groups_list' %}?order_by=leader{% if order_by == 'leader' and reverse != '1' %}&amp;reverse=1{% endif %}">
                                         Староста
                                         {% if order_by == 'leader' and reverse != '1' %}&uarr;
 
@@ -48,34 +48,45 @@
 
                                         {% endif %}
                                     </a>
-                            </th>
-                            <th class="text-primary">Дії</th>
-                        </tr>
-                        </thead>
-                     {% endwith %}
+                                </th>
+                                <th class="text-primary">Дії</th>
+                            </tr>
+                            </thead>
+                        {% endwith %}
                         <tbody>
                         {% for key in object_list %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ key.title }}</td>
-                            <td>{{ key.leader }}</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button"
-                                            data-toggle="dropdown">Дія
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="{% url 'groups_edit' key.pk %}">Редагувати</a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="{% url 'groups_delete' key.pk %}">Видалити</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    {% if is_paginated %}
+
+                                        {{ page_obj.start_index|add:forloop.counter|add:'-1' }}
+
+                                    {% else %}
+
+                                        {{ forloop.counter }}
+
+                                    {% endif %}
+                                </td>
+                                <td>{{ key.title }}</td>
+                                <td>{{ key.leader }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button"
+                                                data-toggle="dropdown">Дія
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="{% url 'groups_edit' key.pk %}">Редагувати</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1"
+                                                   href="{% url 'groups_delete' key.pk %}">Видалити</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
@@ -84,7 +95,7 @@
                     </div>
                 </div>
             </div>
-             <div class="text-center">
+            <div class="text-center">
                 {% include 'snippets/pagination.html' %}
             </div>
         </div>

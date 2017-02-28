@@ -53,6 +53,7 @@ class ContactForm(forms.Form):
 
 class StudentForm(forms.ModelForm):
     last_name = forms.CharField(validators=[])
+    birthday = forms.DateField(input_formats=['%d-%m-%Y','%Y-%m-%d'])
 
     class Meta:
         model = Student
