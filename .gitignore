@@ -56,5 +56,6 @@ local_settings.py
 *.venv*
 media
 components*
+staticfiles*
 
 

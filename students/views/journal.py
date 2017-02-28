@@ -6,6 +6,7 @@ from django.shortcuts import reverse
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 from calendar import monthrange, weekday, day_abbr
+from django.http import JsonResponse
 
 from ..util import paginate
 
@@ -72,7 +73,7 @@ class JournalView(generic.TemplateView):
             # month and current student
 
             try:
-                journal = Journal.objects.get(student=student, date=month)
+                journal = Journal.objects.get(student=student, date=month)[0]
 
             except Exception:
                 journal = None
@@ -82,7 +83,7 @@ class JournalView(generic.TemplateView):
             for day in range(1, number_of_days + 1):
                 days.append({
                     'day': day,
-                    'present': journal and getattr(journal, 'present_day_%d' % day, False) or False,
+                    'present': journal and getattr(journal, 'status', False) or False,
                     'date': date(myear, mmonth, day).strftime('%Y-%m-%d'),
                 })
 
@@ -101,6 +102,26 @@ class JournalView(generic.TemplateView):
         # with paginated students
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        data = request.POST
+
+        # prepare student, dates and presence data
+        current_date = datetime.strptime(data['date'], '%Y-%m-%d').date()
+        month = date(current_date.year, current_date.month, 1)
+        present = data['present'] and True or False
+        student = Student.objects.get(pk=data['pk'])
+
+        # get or create object for given student and month
+        journal = Journal.objects.get_or_create(student=student, date=month)[0]
+
+        # set new presence on journal for given student and save result
+        print(present)
+        setattr(journal, 'status', present)
+        journal.save()
+
+        # return success status
+        return JsonResponse({'status': 'success'})
 
 
 class JournalSpecificStudentView(generic.TemplateView):
