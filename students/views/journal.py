@@ -59,7 +59,10 @@ class JournalView(generic.TemplateView):
             ]
 
         # get all students from database
-        queryset = Student.objects.all().order_by('last_name')
+        if kwargs.get('pk'):
+            queryset = [Student.objects.get(pk=kwargs['pk'])]
+        else:
+            queryset = Student.objects.all().order_by('last_name')
 
         # url to update student presence, for form post
         update_url = reverse('journal')
@@ -73,7 +76,7 @@ class JournalView(generic.TemplateView):
             # month and current student
 
             try:
-                journal = Journal.objects.get(student=student, date=month)[0]
+                journal = Journal.objects.get(student=student,date=month)
 
             except Exception:
                 journal = None
@@ -83,7 +86,7 @@ class JournalView(generic.TemplateView):
             for day in range(1, number_of_days + 1):
                 days.append({
                     'day': day,
-                    'present': journal and getattr(journal, 'status', False) or False,
+                    'present': journal and getattr(journal, 'present_day_%d' % day, False) or False,
                     'date': date(myear, mmonth, day).strftime('%Y-%m-%d'),
                 })
 
@@ -116,8 +119,8 @@ class JournalView(generic.TemplateView):
         journal = Journal.objects.get_or_create(student=student, date=month)[0]
 
         # set new presence on journal for given student and save result
-        print(present)
-        setattr(journal, 'status', present)
+
+        setattr(journal, 'present_day_%d' % current_date.day, present)
         journal.save()
 
         # return success status

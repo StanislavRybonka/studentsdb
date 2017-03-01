@@ -1,4 +1,7 @@
 function initJournal() {
+    var indicator = $('#ajax-progress-indicator');
+    var show_errors = $('#ajax-request-errors');
+
     $('.day-box input[type="checkbox"]').click(function (event) {
         var box = $(this);
         $.ajax(box.data('url'), {
@@ -11,12 +14,23 @@ function initJournal() {
                 'present': box.is(':checked') ? '1' : '',
                 'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
             },
+            'beforeSend': function (xhr, settings) {
+                indicator.show();
+            },
             'error': function (xhr, status, error) {
-                alert(error);
+                indicator.hide();
+                show_errors.show();
+                show_errors.html(error);
+                setTimeout(function () {
+
+                    show_errors.hide();
+
+
+                }, 2000);
 
             },
             'success': function (data, status, xhr) {
-                alert(data['status']);
+                indicator.hide();
 
             }
         })
