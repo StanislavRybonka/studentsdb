@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from ..forms import StudentForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from ..util import paginate, get_current_group
 
 
 # Manage Students
@@ -24,7 +25,13 @@ class StudentsListView(generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Student.objects.order_by('last_name').all()
+        # check if we need to show only one group of students
+        current_group = get_current_group(self.request)
+        if current_group:
+            queryset = Student.objects.filter(student_group=current_group)
+        else:
+            # otherwise show all students
+            queryset = Student.objects.order_by('last_name')
 
         order_by = self.request.GET.get('order_by', '')
         if order_by in ('last_name', 'first_name', 'ticket'):

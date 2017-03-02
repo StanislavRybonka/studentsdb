@@ -9,8 +9,10 @@ class Journal(models.Model):
     date = models.DateField(blank=False, verbose_name='Date')
     status = models.BooleanField(default=False, verbose_name='Status')
 
-for i in range(1,31):
+
+for i in range(1, 31):
     Journal.add_to_class('present_day_%s' % i, models.BooleanField(default=False))
+
 
     class Meta(object):
         verbose_name = 'Journal'

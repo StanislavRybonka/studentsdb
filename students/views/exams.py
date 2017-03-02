@@ -5,6 +5,7 @@ from ..forms import ExamForm
 from  django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import reverse
 from django.contrib import messages
+from ..util import get_current_group
 
 
 class ExamsListView(generic.ListView):
@@ -13,7 +14,15 @@ class ExamsListView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Exam.objects.all()
+
+        queryset = Exam.objects.all()
+        current_group = get_current_group(self.request)
+
+        if current_group:
+            queryset = queryset.filter(group_id=current_group)
+        else:
+            queryset = queryset
+        return queryset
 
 
 class ExamResultView(generic.ListView):

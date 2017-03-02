@@ -39,10 +39,13 @@
             <!-- We can change group_menu in other template, need only override this block -->
             {% block group_menu %}
                 <strong>Група:</strong>
-                <select name="" id="">
+                <select>
                     <option value="">Усі студенти</option>
-                    <option value="">ЕО-21 Рибонька Станіслав (№222)</option>
-                    <option value="">ЕО-23 Гончар Петро (№211)</option>
+                    {% for group in GROUPS %}
+                        <option value="{{ group.id }}" {% if group.selected %}selected='2'{% endif %}>
+                            {{ group.title }}{% if group.leader %},{{ group.leader }}{% endif %}
+                        </option>
+                    {% endfor %}
                 </select>
             {% endblock %}
         </div>
@@ -97,9 +100,11 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
+<script src="{{ ABSOLUTE_URL }}{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+
 <script src="{{ ABSOLUTE_URL }}{% static 'js/main.js' %}" type="text/javascript"></script>
 
 <!-- Extra js files here in children's page -->

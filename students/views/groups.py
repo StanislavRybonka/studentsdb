@@ -4,6 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from ..forms import GroupForm
 from django.shortcuts import reverse
 from django.contrib import messages
+from ..util import get_current_group
 
 
 # Manage Groups
@@ -13,7 +14,14 @@ class GroupsListView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = Group.objects.all()
+
+        current_group = get_current_group(self.request)
+
+        if current_group:
+            queryset = Group.objects.filter(title=current_group)
+        else:
+            queryset = Group.objects.all()
+
         order_by = self.request.GET.get('order_by', '')
         if order_by in ('title', 'leader',):
             queryset = queryset.order_by(order_by)

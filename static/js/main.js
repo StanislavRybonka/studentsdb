@@ -39,6 +39,31 @@ function initJournal() {
 
 }
 
+
+function initGroupSelector() {
+    // look up select elemnt with groups and attach our even handler
+    // on find change event
+    $('#group-selector select').change(function (event) {
+        var group = $(this).val();
+
+        if (group) {
+            // set cookie with expiration date q year since now
+            // cookie creation function takes period in days
+            $.cookie('current_group', group, {'path': '/', 'expires': 365});
+        } else {
+            // otherwise we delete the cookie
+            $.removeCookie('current_group', {'path': '/'});
+        }
+
+        // and reload a page
+        location.reload(true);
+
+        return true;
+
+    })
+}
+
 $(document).ready(function () {
     initJournal();
+    initGroupSelector();
 });

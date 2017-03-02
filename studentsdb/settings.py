@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django_ajax',
     'datetimewidget',
 
-
 ]
 BOWER_INSTALLED_APPS = (
     'js-cookie',
@@ -80,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'students.context_processors.students_processor',
+                'students.context_processors.groups_processors',
 
             ],
             'libraries': {

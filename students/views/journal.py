@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 from calendar import monthrange, weekday, day_abbr
 from django.http import JsonResponse
 
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 
 # Manage Journal
@@ -62,7 +62,11 @@ class JournalView(generic.TemplateView):
         if kwargs.get('pk'):
             queryset = [Student.objects.get(pk=kwargs['pk'])]
         else:
-            queryset = Student.objects.all().order_by('last_name')
+            current_group = get_current_group(self.request)
+            if current_group:
+                queryset = Student.objects.filter(student_group=current_group)
+            else:
+                queryset = Student.objects.all().order_by('last_name')
 
         # url to update student presence, for form post
         update_url = reverse('journal')
@@ -76,7 +80,7 @@ class JournalView(generic.TemplateView):
             # month and current student
 
             try:
-                journal = Journal.objects.get(student=student,date=month)
+                journal = Journal.objects.get(student=student, date=month)
 
             except Exception:
                 journal = None
