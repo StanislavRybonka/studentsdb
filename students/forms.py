@@ -53,7 +53,8 @@ class ContactForm(forms.Form):
 
 class StudentForm(forms.ModelForm):
     last_name = forms.CharField(validators=[])
-    birthday = forms.DateField(input_formats=['%d-%m-%Y','%Y-%m-%d'])
+    birthday = forms.DateField(input_formats=['%d-%m-%Y', '%Y-%m-%d'], widget=forms.DateInput(
+        attrs={'class': 'dateinput', 'addon_after': '<i class="fa fa-calendar" aria-hidden="true"></i>'}))
 
     class Meta:
         model = Student
@@ -128,19 +129,22 @@ class GroupForm(forms.ModelForm):
 # Exam Form
 
 class ExamForm(forms.ModelForm):
+    date = forms.DateTimeField(required=True, widget=forms.DateInput(
+        attrs={'class': 'dateinput', 'addon_after': '<i class="fa fa-calendar" aria-hidden="true"></i>'}))
     class Meta:
         model = Exam
         fields = ['discipline_name', 'date', 'teacher_name', 'group_id']
 
 
-
-#Journal Form
+# Journal Form
 
 from datetimewidget.widgets import DateTimeWidget
+
+
 class JournalForm(forms.ModelForm):
     class Meta:
         model = Journal
-        fields = ['student','date','status']
+        fields = ['student', 'date', 'status']
         widgets = {
             'date': DateTimeWidget(usel10n=True, bootstrap_version=3)
         }
