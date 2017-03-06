@@ -166,9 +166,33 @@ function initEditStudentForm(form, modal) {
     })
 }
 
+
+function initStudentListPage() {
+
+   // Обробити клік по кнопці Студенти, отримати url адресу
+    $('.nav-tabs a').click(function (event) {
+       var url_address = $(this);
+
+        return false
+
+
+    });
+
+   // Додати клас (активний едемент) до меню
+
+   //Отримати html із даними зі сторінки
+
+
+
+
+
+}
+
+
 $(document).ready(function () {
     initJournal();
     initGroupSelector();
     initDateFields();
     initEditStudentPage();
+    initStudentListPage();
 });

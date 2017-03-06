@@ -59,8 +59,8 @@
         <div class="col-xs-12">
             {% with request.resolver_match.url_name as url_name %}
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="{% if url_name == 'students_list' %}active{% endif %}">
-                        <a href="{% url 'students_list' %}">Студенти</a>
+                    <li class="{% if url_name == 'students_list' %}active{% endif %}" data-url="{{ url_name }}">
+                        <a class="menu-item" href="{% url 'students_list' %}">Студенти</a>
                     </li>
                     <li class="{% if url_name == 'journal' %}active{% endif %}">
                         <a href="{% url 'journal' %}">Журнал</a>
