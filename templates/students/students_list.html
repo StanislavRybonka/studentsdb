@@ -20,8 +20,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row" id="content-columns">
-        <div class="col-xs-12" id="content-column">
+    <div class="row students-list">
+        <div class="col-xs-12">
             <!-- Status Message -->
             <div class="panel panel-default">
                 <div class="panel-heading"><h2>База студентів</h2>
@@ -29,8 +29,8 @@
                         <a href="{% url 'students_add' %}" class="btn btn-primary">Додати студента</a>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <table class="table table-hover table-striped">
+                <div class="panel-body students-list">
+                    <table class="table table-hover table-striped" data-url="{{ url_address }}">
                         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
                             <thead>
                             <tr>
@@ -145,10 +145,12 @@
                 {% include 'snippets/pagination.html' %}
             </div>
         </div>
+
     </div>
 {% endblock %}
 
 {% block javascript %}
     <script type="text/javascript" src="{{ ABSOLUTE_URL }}{% static 'js/services.js' %}"></script>
+    <script type="text/javascript" src="{{ ABSOLUTE_URL }}{% static 'js/students/students.js' %}"></script>
 
 {% endblock %}
