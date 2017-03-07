@@ -37,6 +37,7 @@ class StudentsListView(generic.ListView):
         if order_by in ('last_name', 'first_name', 'ticket'):
             students = queryset.order_by(order_by)
             if self.request.GET.get('reverse', '') == '1':
+
                 queryset = students.reverse()
 
         return queryset

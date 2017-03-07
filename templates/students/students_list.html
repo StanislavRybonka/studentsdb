@@ -20,8 +20,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row students-list">
-        <div class="col-xs-12">
+
             <!-- Status Message -->
             <div class="panel panel-default">
                 <div class="panel-heading"><h2>База студентів</h2>
@@ -30,12 +29,12 @@
                     </div>
                 </div>
                 <div class="panel-body students-list">
-                    <table class="table table-hover table-striped" data-url="{{ url_address }}">
+                    <table class="table table-hover table-striped" data-url="{{ url_address }}" id="order_by">
                         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
                             <thead>
                             <tr>
                                 <th>
-                                    <a href="{% url 'students_list' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+                                    <a class="order_by_students" href="{% url 'students_list' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
                                         №
                                         {% if order_by == 'id' and reverse != '1' %}&uarr;
 
@@ -46,7 +45,7 @@
                                 </th>
                                 <th class="text-primary">Фото</th>
                                 <th>
-                                    <a  href="{% url 'students_list' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+                                    <a class="order_by_students"  href="{% url 'students_list' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
                                         Ім*я
                                         {% if order_by == 'first_name' and reverse != '1' %}&uarr;
 
@@ -56,7 +55,7 @@
                                     </a>
                                 </th>
                                 <th>
-                                    <a  href="{% url 'students_list' %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+                                    <a class="order_by_students"  href="{% url 'students_list' %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
                                         Прізвище
                                         {% if order_by == 'last_name' and reverse != '1' %}&uarr;
 
@@ -144,13 +143,10 @@
             <div class="text-center">
                 {% include 'snippets/pagination.html' %}
             </div>
-        </div>
 
-    </div>
 {% endblock %}
 
 {% block javascript %}
-    <script type="text/javascript" src="{{ ABSOLUTE_URL }}{% static 'js/services.js' %}"></script>
-    <script type="text/javascript" src="{{ ABSOLUTE_URL }}{% static 'js/students/students.js' %}"></script>
+
 
 {% endblock %}

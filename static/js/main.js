@@ -167,9 +167,88 @@ function initEditStudentForm(form, modal) {
 }
 
 
+function initSitePages() {
+
+    // Обробити клік по кнопці Студенти, отримати url адресу
+
+    $('.menu-item').click(function (event) {
+        // get url address for all views with data
+        var url_address = $(this);
+
+        // remove active status from link by click
+        $('.nav-tabs li').removeClass('active');
+
+        // add class active for current button
+        $(this).parent().addClass('active');
+        // this ajax return html, that I have in template, Python views stay unchanged
+        $.ajax({
+            'url': url_address.attr('href'),
+            'dataType': 'html',
+            'type': 'get',
+            'success': function (data, status, xhr) {
+
+                if (status != 'success') {
+
+                    alert('Occurs some errors on server side');
+                }
+
+                // assign all data to var
+                var html = $(data);
+
+                // return only needed html for for future content
+                var body = html.find('#content-column');
+
+                // simple write this data to temmplate by selector
+                $('#content-columns').html(body);
+
+            },
+            'error': function () {
+
+                alert('Occurs error during sending request');
+            }
+
+        });
+
+
+        return false
+    });
+}
+
+
+function orderByStudents() {
+
+    $('.table a').click(function (event) {
+        var url_address = $(this);
+
+        $.ajax({
+            'url': url_address.attr('href'),
+            'dataType': 'html',
+            'type': 'get',
+            'success': function (info, status, xhr) {
+
+                 var html = $(info);
+
+                // return only needed html for for future content
+                var body = html.find('#content-column');
+
+                // simple write this data to temmplate by selector
+                $('#content-columns').html(body);
+
+
+            }
+        });
+
+        return false;
+
+    });
+
+}
+
 $(document).ready(function () {
     initJournal();
     initGroupSelector();
     initDateFields();
     initEditStudentPage();
+    initSitePages();
+    orderByStudents();
 });
