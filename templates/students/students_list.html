@@ -104,11 +104,11 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a class="student-edit-form-link" href="{% url 'students_edit' student.id %}"
+                                    <a class="student_edit_form_link" href="{% url 'students_edit' student.id %}"
                                        title="Редагувати">{{ student.first_name }}</a>
                                 </td>
                                 <td>
-                                    <a class="student-edit-form-link" href="{% url 'students_edit' student.id %}"
+                                    <a class="student_edit_form_link" href="{% url 'students_edit' student.id %}"
                                        title="Редагувати">{{ student.last_name }}</a>
                                 </td>
                                 <td>{{ student.ticket }}</td>
@@ -120,7 +120,7 @@
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li role="presentation">
-                                                <a class="student-edit-form-link" role="menuitem" tabindex="-1"
+                                                <a class="student_edit_form_link" role="menuitem" tabindex="-1"
                                                    href="{% url 'students_edit' student.id %}">Редагувати</a>
                                             </li>
                                             <li role="presentation">

@@ -77,7 +77,7 @@ function initDateFields() {
 
 
 function initEditStudentPage() {
-    $('a.student-edit-form-link').click(function (event) {
+    $('a.student_edit_form_link').click(function (event) {
         var link = $(this);
 
         $.ajax({
@@ -118,12 +118,15 @@ function initEditStudentPage() {
         return false;
 
     });
+    return false;
+
 }
 
 function initEditStudentForm(form, modal) {
 
     // atach datepicker
     initDateFields();
+    initSitePages();
 
     // close modal window on Cancel button click
     form.find('input[name="cancel_button"]').click(function (event) {
@@ -163,7 +166,8 @@ function initEditStudentForm(form, modal) {
             }
 
         }
-    })
+    });
+    return false
 }
 
 
@@ -171,9 +175,9 @@ function initSitePages() {
 
     // Обробити клік по кнопці Студенти, отримати url адресу
 
-    $('.menu-item').click(function (event) {
+    $('a.menu_item_url').click(function (event) {
         // get url address for all views with data
-        var url_address = $(this);
+        var url = $(this);
 
         // remove active status from link by click
         $('.nav-tabs li').removeClass('active');
@@ -182,30 +186,20 @@ function initSitePages() {
         $(this).parent().addClass('active');
         // this ajax return html, that I have in template, Python views stay unchanged
         $.ajax({
-            'url': url_address.attr('href'),
+            'url': url.attr('href'),
             'dataType': 'html',
             'type': 'get',
             'success': function (data, status, xhr) {
 
-                if (status != 'success') {
 
-                    alert('Occurs some errors on server side');
-                }
-
-                // assign all data to var
-                var html = $(data);
-
-                // return only needed html for for future content
-                var body = html.find('#content-column');
-
-                // simple write this data to temmplate by selector
+                 var html = $(data);
+                 var body = html.find('#content-column');
                 $('#content-columns').html(body);
 
-            },
-            'error': function () {
 
-                alert('Occurs error during sending request');
+
             }
+
 
         });
 
@@ -217,7 +211,7 @@ function initSitePages() {
 
 function orderByStudents() {
 
-    $('.table a').click(function (event) {
+    $('a.order_by_students').click(function (event) {
         var url_address = $(this);
 
         $.ajax({
@@ -250,5 +244,6 @@ $(document).ready(function () {
     initDateFields();
     initEditStudentPage();
     initSitePages();
-    orderByStudents();
+    //orderByStudents();
+
 });

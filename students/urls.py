@@ -6,7 +6,7 @@ from .views.contact_admin import ContactUsView
 
 urlpatterns = [
     # Students urls
-    url(r'^students-list/$', students_views.StudentsListView.as_view(), name='students_list'),
+    url(r'^$', students_views.StudentsListView.as_view(), name='students_list'),
     url(r'^students/add/$', students_views.StudentAddView.as_view(), name='students_add'),
     url(r'^students/(?P<pk>\d+)/edit/$', students_views.StudentsEditView.as_view(), name='students_edit'),
     url(r'^students/(?P<pk>\d+)/delete/$', students_views.StudentsDeleteView.as_view(), name='students_delete'),

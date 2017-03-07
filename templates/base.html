@@ -60,19 +60,19 @@
             {% with request.resolver_match.url_name as url_name %}
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="{% if url_name == 'students_list' %}active{% endif %}" data-url="{{ url_name }}">
-                        <a class="menu-item" href="{% url 'students_list' %}">Студенти</a>
+                        <a class="menu_item_url" href="{% url 'students_list' %}">Студенти</a>
                     </li>
                     <li class="{% if url_name == 'journal' %}active{% endif %}">
-                        <a class="menu-item" href="{% url 'journal'%}">Журнал</a>
+                        <a class="menu_item_url" href="{% url 'journal'%}">Журнал</a>
                     </li>
                     <li class="{% if url_name == 'groups_list' %}active{% endif %}">
-                        <a class="menu-item" href="{% url 'groups_list' %}">Групи</a>
+                        <a class="menu_item_url" href="{% url 'groups_list' %}">Групи</a>
                     </li>
                     <li class="{% if url_name == 'exams_list' %}active{% endif %}">
-                        <a class="menu-item" href="{% url 'exams_list' %}">Екзамени</a>
+                        <a class="menu_item_url" href="{% url 'exams_list' %}">Екзамени</a>
                     </li>
                     <li class="{% if url_name == 'contact_form' %}active{% endif %}">
-                        <a class="menu-item" href="{% url 'contact-admin' %}">Contact us</a>
+                        <a class="menu_item_url" href="{% url 'contact-admin' %}">Contact us</a>
                     </li>
                 </ul>
             {% endwith %}
