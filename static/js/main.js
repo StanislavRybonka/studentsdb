@@ -79,6 +79,7 @@ function initDateFields() {
 function initEditStudentPage() {
     $('a.student_edit_form_link').click(function (event) {
         var link = $(this);
+        alert(link.attr('href'));
 
         $.ajax({
             'url': link.attr('href'),
@@ -118,7 +119,7 @@ function initEditStudentPage() {
         return false;
 
     });
-    return false;
+
 
 }
 
@@ -126,7 +127,7 @@ function initEditStudentForm(form, modal) {
 
     // atach datepicker
     initDateFields();
-    initSitePages();
+
 
     // close modal window on Cancel button click
     form.find('input[name="cancel_button"]').click(function (event) {
@@ -167,7 +168,7 @@ function initEditStudentForm(form, modal) {
 
         }
     });
-    return false
+
 }
 
 
@@ -175,9 +176,11 @@ function initSitePages() {
 
     // Обробити клік по кнопці Студенти, отримати url адресу
 
+
     $('a.menu_item_url').click(function (event) {
         // get url address for all views with data
         var url = $(this);
+
 
         // remove active status from link by click
         $('.nav-tabs li').removeClass('active');
@@ -192,9 +195,7 @@ function initSitePages() {
             'success': function (data, status, xhr) {
 
 
-                 var html = $(data);
-                 var body = html.find('#content-column');
-                $('#content-columns').html(body);
+$('#content-columns').html($(data).find('#content-column').html());
 
 
 
@@ -206,6 +207,7 @@ function initSitePages() {
 
         return false
     });
+
 }
 
 
@@ -226,8 +228,8 @@ function orderByStudents() {
                 var body = html.find('#content-column');
 
                 // simple write this data to temmplate by selector
-                $('#content-columns').html(body);
-
+                $('#content-columns').html(info);
+return false;
 
             }
         });
@@ -239,11 +241,12 @@ function orderByStudents() {
 }
 
 $(document).ready(function () {
+
     initJournal();
     initGroupSelector();
     initDateFields();
-    initEditStudentPage();
+initEditStudentPage();
     initSitePages();
-    //orderByStudents();
+    orderByStudents();
 
 });
