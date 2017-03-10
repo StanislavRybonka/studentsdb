@@ -79,7 +79,6 @@ function initDateFields() {
 function initEditStudentPage() {
     $('a.student_edit_form_link').click(function (event) {
         var link = $(this);
-        alert(link.attr('href'));
 
         $.ajax({
             'url': link.attr('href'),
@@ -181,7 +180,6 @@ function initSitePages() {
         // get url address for all views with data
         var url = $(this);
 
-
         // remove active status from link by click
         $('.nav-tabs li').removeClass('active');
 
@@ -195,15 +193,15 @@ function initSitePages() {
             'success': function (data, status, xhr) {
 
 
-$('#content-columns').html($(data).find('#content-column').html());
-
+               $('#content-column').html(data);
+               $('#header').hide();
+               $('#group-selector').hide();
+               $('#sub-header').hide();
 
 
             }
 
-
         });
-
 
         return false
     });
@@ -220,16 +218,12 @@ function orderByStudents() {
             'url': url_address.attr('href'),
             'dataType': 'html',
             'type': 'get',
-            'success': function (info, status, xhr) {
+            'success': function (data, status, xhr) {
 
-                 var html = $(info);
-
-                // return only needed html for for future content
-                var body = html.find('#content-column');
-
-                // simple write this data to temmplate by selector
-                $('#content-columns').html(info);
-return false;
+                $('#content-column').html(data);
+                $('#header').hide();
+               $('#group-selector').hide();
+               $('#sub-header').hide();
 
             }
         });
@@ -245,7 +239,7 @@ $(document).ready(function () {
     initJournal();
     initGroupSelector();
     initDateFields();
-initEditStudentPage();
+    initEditStudentPage();
     initSitePages();
     orderByStudents();
 
