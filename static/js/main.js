@@ -192,11 +192,15 @@ function initSitePages() {
             'type': 'get',
             'success': function (data, status, xhr) {
 
+                var html = $('#content-columns');
 
-               $('#content-column').html(data);
-               $('#header').hide();
-               $('#group-selector').hide();
-               $('#sub-header').hide();
+                var body = html.find('##content-column');
+                html.html(body);
+
+               // $('#content-column').html(data);
+               // $('#header').hide();
+               // $('#group-selector').hide();
+               // $('#sub-header').hide();
 
 
             }
