@@ -41,7 +41,7 @@ function initJournal() {
 
 
 function initGroupSelector() {
-    // look up select elemnt with groups and attach our even handler
+    // look up select element with groups and attach our even handler
     // on find change event
     $('#group-selector select').change(function (event) {
         var group = $(this).val();
@@ -65,6 +65,7 @@ function initGroupSelector() {
 
 
 function initDateFields() {
+
     $('input.dateinput').datetimepicker({
         'format': 'YYYY-MM-DD'
 
@@ -77,6 +78,7 @@ function initDateFields() {
 
 
 function initEditStudentPage() {
+
     $('a.student_edit_form_link').click(function (event) {
         var link = $(this);
 
@@ -119,14 +121,12 @@ function initEditStudentPage() {
 
     });
 
-
 }
 
 function initEditStudentForm(form, modal) {
 
     // atach datepicker
     initDateFields();
-
 
     // close modal window on Cancel button click
     form.find('input[name="cancel_button"]').click(function (event) {
@@ -173,10 +173,8 @@ function initEditStudentForm(form, modal) {
 
 function initSitePages() {
 
-    // Обробити клік по кнопці Студенти, отримати url адресу
-
-
     $('a.menu_item_url').click(function (event) {
+
         // get url address for all views with data
         var url = $(this);
 
@@ -185,6 +183,7 @@ function initSitePages() {
 
         // add class active for current button
         $(this).parent().addClass('active');
+
         // this ajax return html, that I have in template, Python views stay unchanged
         $.ajax({
             'url': url.attr('href'),
@@ -192,16 +191,17 @@ function initSitePages() {
             'type': 'get',
             'success': function (data, status, xhr) {
 
-                var html = $('#content-columns');
 
-                var body = html.find('##content-column');
-                html.html(body);
+                var html = $(data);
+                var body = html.find('#content-column');
 
-               // $('#content-column').html(data);
-               // $('#header').hide();
-               // $('#group-selector').hide();
-               // $('#sub-header').hide();
+                $(function () {
+                    initEditStudentPage();
+                    orderByStudents();
+                    initJournal();
+                });
 
+                $('#content-columns').html(body);
 
             }
 
@@ -209,13 +209,13 @@ function initSitePages() {
 
         return false
     });
-
 }
 
 
 function orderByStudents() {
 
     $('a.order_by_students').click(function (event) {
+
         var url_address = $(this);
 
         $.ajax({
@@ -224,27 +224,33 @@ function orderByStudents() {
             'type': 'get',
             'success': function (data, status, xhr) {
 
-                $('#content-column').html(data);
-                $('#header').hide();
-               $('#group-selector').hide();
-               $('#sub-header').hide();
+                var html = $(data);
+                var body = html.find('#content-column');
+
+                $('#content-columns').html(body);
+
+                $(function () {
+                    initEditStudentPage();
+                    orderByStudents();
+
+                });
 
             }
+
         });
 
         return false;
 
     });
-
 }
 
-$(document).ready(function () {
 
+$(document).ready(function () {
     initJournal();
     initGroupSelector();
     initDateFields();
     initEditStudentPage();
     initSitePages();
     orderByStudents();
-
 });
+
