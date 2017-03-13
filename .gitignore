@@ -57,5 +57,6 @@ local_settings.py
 media
 components*
 staticfiles*
+node_modules*
 
 
