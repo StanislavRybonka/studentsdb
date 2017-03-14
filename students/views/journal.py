@@ -24,10 +24,10 @@ class JournalView(generic.TemplateView):
         # check  if we need to display some specific month
         if self.request.GET.get('month'):
 
-            month = datetime.strptime(self.request.GET['month'], '%Y-%m-%d').date()
-
+            month = datetime.strptime(self.request.GET.get('month'), '%Y-%m-%d'
+                                      ).date()
         else:
-            # otherwise display current month data
+            # otherwise just displaying current month data
             today = datetime.today()
             month = date(today.year, today.month, 1)
 
@@ -43,6 +43,7 @@ class JournalView(generic.TemplateView):
         context['month_verbose'] = month.strftime('%B')
 
         # we'll use this variable in students pagination
+
         context['cur_month'] = month
 
         # prepare variable for template to generate
@@ -103,7 +104,7 @@ class JournalView(generic.TemplateView):
             })
 
             # apply pagination, 10 students per page
-        context = paginate(students, 10, self.request, context, var_name='students')
+        context = paginate(students, 1, self.request, context, var_name='students')
 
         # finally return updated context
         # with paginated students

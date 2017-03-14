@@ -199,6 +199,7 @@ function initSitePages() {
                     initEditStudentPage();
                     orderByStudents();
                     initJournal();
+                    initPaginate();
                 });
 
                 $('#content-columns').html(body);
@@ -232,6 +233,7 @@ function orderByStudents() {
                 $(function () {
                     initEditStudentPage();
                     orderByStudents();
+                    initPaginate();
 
                 });
 
@@ -244,6 +246,35 @@ function orderByStudents() {
     });
 }
 
+function initPaginate() {
+    $('a.paginate_by').click(function (event) {
+
+        var paginate_url = $(this).attr('href');
+        var current_page_url = $('table').attr('data-url');
+        $.ajax({
+            'url': current_page_url + paginate_url,
+            'dataType': 'html',
+            'type': 'get',
+            'success': function (data) {
+                var html = $(data);
+                var body = html.find('table');
+                $('table').html(body);
+
+                $(function () {
+                    initEditStudentPage();
+                    orderByStudents();
+
+                });
+
+            }
+
+        });
+
+        return false
+
+    });
+
+}
 
 $(document).ready(function () {
     initJournal();
@@ -252,5 +283,6 @@ $(document).ready(function () {
     initEditStudentPage();
     initSitePages();
     orderByStudents();
+    initPaginate();
 });
 

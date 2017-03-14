@@ -16,7 +16,6 @@
                     <a href="{% url 'students_add' %}">Add students</a>
                 </div>
             {% else %}
-
                 <div class="panel panel-default">
                     <div class="panel-heading"><h2>Облік відвідування</h2></div>
                     <div class="panel-body">
@@ -24,8 +23,8 @@
                             Autosaving by each click
                             <span id="ajax-progress-indicator">Process...</span>
                         </div>
-                     <div class="alert alert-danger" id="ajax-request-errors">
-                         Some errors occurs during request
+                        <div class="alert alert-danger" id="ajax-request-errors">
+                            Some errors occurs during request
                         </div>
                         <div class="text-center" id="journal-nav">
                             <a href="?month={{ prev_month }}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
@@ -35,71 +34,73 @@
                             <a href="?month={{ next_month }}"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                             </a>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered text-center" id="students-journal">
-                                <thead>
-                                <tr class="header">
-                                    <th class="num">№</th>
-                                    <th class="name">Student</th>
-                                    {% for day in month_header %}
-                                        <th class="day-header">
-                                            <!-- TO DO translate day here -->
-                                            {{ day.verbose }}
-                                            <br>
-                                            {{ day.day }}
-                                        </th>
+                        <table class="table table-bordered text-center" id="students-journal"
+                               data-url="{% url 'journal' student.id %}">
+
+                            <thead>
+                            <tr class="header">
+                                <th class="num">№</th>
+                                <th class="name">Student</th>
+                                {% for day in month_header %}
+                                    <th class="day-header">
+                                        <!-- TO DO translate day here -->
+                                        {{ day.verbose }}
+                                        <br>
+                                        {{ day.day }}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            {% csrf_token %}
+
+                            {% for student in students %}
+                                <tr>
+                                    <td>
+                                        {% if is_paginated %}
+
+                                            {{ page_obj.start_index|add:forloop.counter|add:'-1' }}
+
+                                        {% else %}
+
+                                            {{ forloop.counter }}
+
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        <a href="{% url 'journal' student.id %}" title="Edit student"
+                                           target="_blank">
+                                            {{ student.fullname }}
+                                        </a>
+                                    </td>
+
+                                    {% for day in student.days %}
+                                        <td class="day-box">
+                                            <input type="checkbox" data-student-id="{{ student.id }}"
+                                                   data-date="{{ day.date }}"
+                                                   data-url="{{ student.update_url }}" value="1"
+                                                    {% if day.present %}
+                                                   checked="checked"{% endif %}>
+
+                                        </td>
                                     {% endfor %}
                                 </tr>
-                                </thead>
+                            {% endfor %}
 
-                                <tbody>
-                                {% csrf_token %}
+                            </tbody>
+                        </table>
 
-                                {% for student in students %}
-                                    <tr>
-                                        <td>
-                                            {% if is_paginated %}
-
-                                                {{ page_obj.start_index|add:forloop.counter|add:'-1' }}
-
-                                            {% else %}
-
-                                                {{ forloop.counter }}
-
-                                            {% endif %}
-                                        </td>
-
-                                        <td>
-                                            <a href="{% url 'journal' student.id %}" title="Edit student"
-                                               target="_blank">
-                                                {{ student.fullname }}
-                                            </a>
-                                        </td>
-
-                                        {% for day in student.days %}
-                                            <td class="day-box">
-                                                <input type="checkbox" data-student-id="{{ student.id }}"
-                                                       data-date="{{ day.date }}"
-                                                       data-url="{{ student.update_url }}" value="1"
-                                                        {% if day.present %}
-                                                       checked="checked"{% endif %}>
-
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                                {% endfor %}
-
-                                </tbody>
-                            </table>
-                        </div>
 
                     </div>
                 </div>
             {% endif %}
 
-            {% with object_list=students %}
+            <div class="text-center">
                 {% include 'snippets/pagination.html' %}
-            {% endwith %}
+            </div>
         </div>
     </div>
 
