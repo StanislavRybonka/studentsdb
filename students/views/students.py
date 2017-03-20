@@ -53,7 +53,6 @@ class StudentAddView(SuccessMessageMixin, generic.CreateView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-
         # To do notify student by email that he is added to group
         return super(StudentAddView, self).form_valid(form)
 

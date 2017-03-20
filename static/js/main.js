@@ -104,12 +104,17 @@ function initEditStudentPage() {
                 // init our edit form
                 initEditStudentForm(form, modal);
 
+
+                modal.show();
                 // setup and show modal window finally
                 modal.modal({
                     'show': true,
                     'keyboard': false,
-                    'backdrop': false
+                    'backdrop': false,
                 });
+
+                initHistoryBack(link.attr('href'));
+                initPhotoPreview();
             },
             'error': function () {
                 alert('Error on server try again later');
@@ -154,12 +159,14 @@ function initEditStudentForm(form, modal) {
 
                 // initialie form fields and buttons
                 initEditStudentForm(newform, modal);
+
             } else {
                 // if no form, it means success and we need to reload page
                 // to get updated student list
                 // reload after 2 seconds, so that user can read
                 // success message
                 setTimeout(function () {
+                    window.history.pushState(null, null, '/');
                     location.reload(true);
 
                 }, 1000)
@@ -200,6 +207,7 @@ function initSitePages() {
                     orderByStudents();
                     initJournal();
                     initPaginate();
+                    initPhotoPreview();
                 });
 
                 $('#content-columns').html(body);
@@ -263,7 +271,6 @@ function initPaginate() {
                 $(function () {
                     initEditStudentPage();
                     orderByStudents();
-
                 });
 
             }
@@ -276,6 +283,43 @@ function initPaginate() {
 
 }
 
+
+function initHistoryBack(url) {
+
+    window.history.pushState('/', null, url);
+
+    window.onpopstate = function (e) {
+
+        $('.modal').hide();
+
+    };
+
+    return true;
+
+}
+
+function initPhotoPreview() {
+
+    var block_preview = $('#image-preview');
+
+    block_preview.hide();
+
+    $('#id_photo').change(function (e) {
+
+        block_preview.show();
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
+        }
+
+    });
+}
+
 $(document).ready(function () {
     initJournal();
     initGroupSelector();
@@ -284,5 +328,6 @@ $(document).ready(function () {
     initSitePages();
     orderByStudents();
     initPaginate();
+    initPhotoPreview();
 });
 

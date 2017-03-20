@@ -49,3 +49,6 @@ th.day-header{
 #ajax-request-errors{
     display: none;
 }
+#id_photo{
+    padding-top: 10px;
+}

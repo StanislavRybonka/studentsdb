@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from studentsdb.settings import CONTENT_TYPES, MAX_UPLOAD_SIZE
 from django.core.mail import send_mail
 from studentsdb.local_settings import MANAGERS
+from .widgets import ImageWidget
 
 from .models.group import Group
 
@@ -58,7 +59,10 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'middle_name', 'birthday', 'photo', 'ticket', 'notes', 'student_group']
+        fields = ('first_name', 'last_name', 'middle_name', 'birthday', 'photo', 'ticket', 'notes', 'student_group',)
+        widgets = {
+            'photo': ImageWidget
+        }
 
     def clean_photo(self):
         cleaned_data = super(StudentForm, self).clean()
@@ -75,6 +79,7 @@ class StudentForm(forms.ModelForm):
             elif file.size > MAX_UPLOAD_SIZE:
 
                 raise ValidationError('Invalid size.')
+        return file
 
     def clean_first_name(self):
         name = self.cleaned_data.get('first_name')

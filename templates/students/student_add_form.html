@@ -31,9 +31,16 @@
 
                                     {% bootstrap_field form.photo %}
 
+                                     <div id="image-preview">
+                                        <label for="preview">New Foto<br>
+                                            <img class="img-thumbnail" src="#" width="100" id="preview" alt="IMG">
+                                        </label>
+                                    </div>
+
                                     {% bootstrap_field form.ticket %}
 
                                     {% bootstrap_field form.notes %}
+
                                     {% bootstrap_field form.student_group %}
                                     <!-- To do buttons with bootstrap3 -->
                                     <div class="row">

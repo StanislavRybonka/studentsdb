@@ -41,7 +41,7 @@ function initJournal() {
 
 
 function initGroupSelector() {
-    // look up select elemnt with groups and attach our even handler
+    // look up select element with groups and attach our even handler
     // on find change event
     $('#group-selector select').change(function (event) {
         var group = $(this).val();
@@ -65,6 +65,7 @@ function initGroupSelector() {
 
 
 function initDateFields() {
+
     $('input.dateinput').datetimepicker({
         'format': 'YYYY-MM-DD'
 
@@ -77,6 +78,7 @@ function initDateFields() {
 
 
 function initEditStudentPage() {
+
     $('a.student_edit_form_link').click(function (event) {
         var link = $(this);
 
@@ -102,12 +104,16 @@ function initEditStudentPage() {
                 // init our edit form
                 initEditStudentForm(form, modal);
 
+
+                modal.show();
                 // setup and show modal window finally
                 modal.modal({
                     'show': true,
                     'keyboard': false,
-                    'backdrop': false
+                    'backdrop': false,
                 });
+
+                initHistoryBack(link.attr('href'));
             },
             'error': function () {
                 alert('Error on server try again later');
@@ -119,14 +125,12 @@ function initEditStudentPage() {
 
     });
 
-
 }
 
 function initEditStudentForm(form, modal) {
 
     // atach datepicker
     initDateFields();
-
 
     // close modal window on Cancel button click
     form.find('input[name="cancel_button"]').click(function (event) {
@@ -160,6 +164,7 @@ function initEditStudentForm(form, modal) {
                 // reload after 2 seconds, so that user can read
                 // success message
                 setTimeout(function () {
+                    window.history.pushState(null, null, '/');
                     location.reload(true);
 
                 }, 1000)
@@ -173,10 +178,8 @@ function initEditStudentForm(form, modal) {
 
 function initSitePages() {
 
-    // Обробити клік по кнопці Студенти, отримати url адресу
-
-
     $('a.menu_item_url').click(function (event) {
+
         // get url address for all views with data
         var url = $(this);
 
@@ -185,6 +188,7 @@ function initSitePages() {
 
         // add class active for current button
         $(this).parent().addClass('active');
+
         // this ajax return html, that I have in template, Python views stay unchanged
         $.ajax({
             'url': url.attr('href'),
@@ -192,16 +196,19 @@ function initSitePages() {
             'type': 'get',
             'success': function (data, status, xhr) {
 
+
                 var html = $(data);
+                var body = html.find('#content-column');
 
-                var body = html.find('#content-columns');
-                $('#content-column').html(body);
+                $(function () {
+                    initEditStudentPage();
+                    orderByStudents();
+                    initJournal();
+                    initPaginate();
+                    initHistoryBack();
+                });
 
-               // $('#content-column').html(data);
-               // $('#header').hide();
-               // $('#group-selector').hide();
-               // $('#sub-header').hide();
-
+                $('#content-columns').html(body);
 
             }
 
@@ -209,13 +216,13 @@ function initSitePages() {
 
         return false
     });
-
 }
 
 
 function orderByStudents() {
 
     $('a.order_by_students').click(function (event) {
+
         var url_address = $(this);
 
         $.ajax({
@@ -224,27 +231,88 @@ function orderByStudents() {
             'type': 'get',
             'success': function (data, status, xhr) {
 
-                $('#content-column').html(data);
-                $('#header').hide();
-               $('#group-selector').hide();
-               $('#sub-header').hide();
+                var html = $(data);
+                var body = html.find('#content-column');
+
+                $('#content-columns').html(body);
+
+                $(function () {
+                    initEditStudentPage();
+                    orderByStudents();
+                    initPaginate();
+
+                });
 
             }
+
         });
 
         return false;
 
     });
+}
+
+function initPaginate() {
+    $('a.paginate_by').click(function (event) {
+
+        var paginate_url = $(this).attr('href');
+        var current_page_url = $('table').attr('data-url');
+        $.ajax({
+            'url': current_page_url + paginate_url,
+            'dataType': 'html',
+            'type': 'get',
+            'success': function (data) {
+                var html = $(data);
+                var body = html.find('table');
+                $('table').html(body);
+
+                $(function () {
+                    initEditStudentPage();
+                    orderByStudents();
+                });
+
+            }
+
+        });
+
+        return false
+
+    });
+
+}
+
+
+function initHistoryBack(url) {
+
+    window.history.pushState('/', null, url);
+
+    window.onpopstate = function (e) {
+
+        $('.modal').hide();
+
+    };
+
+    return true;
+
+}
+
+function initPhotoPreview() {
+    $('#id_photo').change(function (e) {
+         var selectedFile = $('#id_photo')[0].files[0];
+         var url_address = $('form').attr('data-media_root');
+
+     $('#preview').attr('src','/media/media/'+selectedFile.name)
+
+
+    });
+    return true
 
 }
 
 $(document).ready(function () {
+initPhotoPreview();
 
-    initJournal();
-    initGroupSelector();
-    initDateFields();
-    initEditStudentPage();
-    initSitePages();
-    orderByStudents();
+
 
 });
+

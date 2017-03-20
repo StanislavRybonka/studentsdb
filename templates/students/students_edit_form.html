@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles crispy_forms_tags bootstrap3 %}
+
 {% block meta_title %}Редагувати студента{% endblock %}
 
 {% block content %}
@@ -28,6 +29,12 @@
 
                                     {% bootstrap_field form.photo %}
 
+                                    <div id="image-preview">
+                                        <label for="preview">New Foto<br>
+                                            <img class="img-thumbnail" src="#" width="100" id="preview" alt="IMG">
+                                        </label>
+                                    </div>
+
                                     {% bootstrap_field form.ticket %}
 
                                     {% bootstrap_field form.notes %}
@@ -45,6 +52,7 @@
                                     </div>
                                 </form>
                             </fieldset>
+
                         </div>
                     </div>
                 </div>
