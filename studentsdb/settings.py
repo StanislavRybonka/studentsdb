@@ -235,10 +235,16 @@ LOGGING = {
             'filename': LOG_FILE,
             'formatter': 'verbose'
         },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': 'django.core.mail.backends.console.EmailBackend',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['null'],
+            'handlers': ['null', 'mail_admins'],
             'propagate': True,
             'level': 'INFO',
         },
@@ -247,7 +253,7 @@ LOGGING = {
             'level': 'INFO',
         },
         'students.views.contact_admin': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'file', 'mail_admins'],
             'level': 'INFO',
         }
     }

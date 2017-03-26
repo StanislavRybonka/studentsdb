@@ -1,12 +1,10 @@
-from django.shortcuts import render
-from  django.core.mail import send_mail
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse, reverse_lazy
 from ..forms import ContactForm
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import mail_admins
 
-from studentsdb.local_settings import ADMIN_EMAIL
+import logging
+
 
 
 class ContactUsView(SuccessMessageMixin, generic.FormView):
@@ -17,4 +15,14 @@ class ContactUsView(SuccessMessageMixin, generic.FormView):
 
     def form_valid(self, form):
         form.send_email()
+
         return super(ContactUsView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        message = 'During sending process occurs issues.Try again later.'
+
+        logger = logging.getLogger(__name__)
+
+        logger.exception(message)
+
+        return super(ContactUsView, self).form_invalid(form)

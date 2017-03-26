@@ -136,6 +136,7 @@ class GroupForm(forms.ModelForm):
 class ExamForm(forms.ModelForm):
     date = forms.DateTimeField(required=True, widget=forms.DateInput(
         attrs={'class': 'dateinput', 'addon_after': '<i class="fa fa-calendar" aria-hidden="true"></i>'}))
+
     class Meta:
         model = Exam
         fields = ['discipline_name', 'date', 'teacher_name', 'group_id']
