@@ -2,6 +2,7 @@ import logging
 
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django import dispatch
 
 from .models import Student, Group, Exam
 
@@ -68,3 +69,15 @@ def log_exam_deleted_event(sender, **kwargs):
 
     exam = kwargs['instance']
     logger.info('Exam was deleted, discipline:{} (ID:{})'.format(exam.discipline_name, exam.id))
+
+
+contact_admin_signal = dispatch.Signal(providing_args=["from_email"])
+
+
+@receiver(contact_admin_signal)
+def contact_admin_signal_handler(sender, **kwargs):
+    email = kwargs.get('from_email')
+
+    logger = logging.getLogger(__name__)
+
+    logger.info('Email successful sended to administration, user email: {}'.format(email))

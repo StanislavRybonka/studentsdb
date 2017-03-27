@@ -12,6 +12,6 @@ djangoajax
 django-ajax
 django-datetime-widget==0.9.3
 python-dateutil==2.6.0
-
+django-debug-toolbar==1.7
 
 

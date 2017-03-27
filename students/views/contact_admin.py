@@ -4,6 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from ..models.log_entry import LogEntry
 
 import logging
+from students.signals import contact_admin_signal
 
 
 class ContactUsView(SuccessMessageMixin, generic.FormView):
@@ -14,6 +15,8 @@ class ContactUsView(SuccessMessageMixin, generic.FormView):
 
     def form_valid(self, form):
         form.send_email()
+
+        contact_admin_signal.send(sender=self.__class__, from_email=self.request.POST['from_email'])
 
         return super(ContactUsView, self).form_valid(form)
 

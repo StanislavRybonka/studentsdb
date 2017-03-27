@@ -26,3 +26,8 @@ urlpatterns = [
 # Set media files folder only for development
 if DEBUG:
     urlpatterns += [] + static(MEDIA_URL, document_root=MEDIA_ROOT)
+    import debug_toolbar
+
+    urlpatterns = [
+                      url(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'djangobower',
     'django_ajax',
     'datetimewidget',
+    'debug_toolbar',
 
 ]
 BOWER_INSTALLED_APPS = (
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
 
@@ -242,28 +244,46 @@ LOGGING = {
             'formatter': 'verbose',
         },
         'db': {
-            'level': 'ERROR',
+            'level': 'INFO',
             'class': 'students.handlers.DbLogHandler',
             'formatter': 'verbose'
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['null', 'mail_admins', 'db'],
+            'handlers': ['null','mail_admins', 'db'],
             'propagate': True,
             'level': 'INFO',
         },
         'students.signals': {
-            'handlers': ['console', 'file', 'db'],
+            'handlers': ['console', 'file'],
             'level': 'INFO',
         },
         'students': {
             'handlers': ['console', 'file', 'mail_admins', 'db'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False,
-        }
+        },
     }
 }
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]
+
+SHOW_TOOLBAR_CALLBACK = True
+INTERNAL_IPS = ['127.0.0.1']
 
 # Вказувати абсолютну адрессу
 try:
