@@ -9,7 +9,7 @@ from ..util import paginate, get_current_group
 
 # Manage Students
 class StudentsListView(generic.ListView):
-    model = Student
+
     paginate_by = 1
     template_name = 'students/students_list.html'
 

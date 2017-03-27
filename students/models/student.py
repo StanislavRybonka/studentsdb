@@ -2,10 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 from .group import Group
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.contrib import messages
-from django.utils.html import mark_safe
 
 
 class Student(models.Model):

@@ -241,20 +241,26 @@ LOGGING = {
             'email_backend': 'django.core.mail.backends.console.EmailBackend',
             'formatter': 'verbose',
         },
+        'db': {
+            'level': 'ERROR',
+            'class': 'students.handlers.DbLogHandler',
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['null', 'mail_admins'],
+            'handlers': ['null', 'mail_admins', 'db'],
             'propagate': True,
             'level': 'INFO',
         },
         'students.signals': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'file', 'db'],
             'level': 'INFO',
         },
-        'students.views.contact_admin': {
-            'handlers': ['console', 'file', 'mail_admins'],
-            'level': 'INFO',
+        'students': {
+            'handlers': ['console', 'file', 'mail_admins', 'db'],
+            'level': 'DEBUG',
+            'propagate': False,
         }
     }
 }

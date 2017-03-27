@@ -1,10 +1,9 @@
 from ..forms import ContactForm
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.mail import mail_admins
+from ..models.log_entry import LogEntry
 
 import logging
-
 
 
 class ContactUsView(SuccessMessageMixin, generic.FormView):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Student, Group, Journal, Exam
+from .models import Student, Group, Journal, Exam,LogEntry
 from .models.exam import ExamResult
 from django.forms import ModelForm, ValidationError
 
@@ -52,9 +52,18 @@ class GroupAdmin(admin.ModelAdmin):
     form = GroupFormAdmin
 
 
+class LogEntryAdmin(admin.ModelAdmin):
+    ordering = ['-date']
+    list_display = ['error_level','date','error_message']
+    list_filter = ['error_level']
+    search_fields = ['error_level','error_message']
+
+
 # Register your models here.
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Journal)
 admin.site.register(Exam)
 admin.site.register(ExamResult)
+admin.site.register(LogEntry,LogEntryAdmin)
+
