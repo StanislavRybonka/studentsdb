@@ -6,15 +6,6 @@ from django.db.models.signals import post_migrate
 import logging
 
 
-def log_migrate(sender, **kwargs):
-    log = kwargs['plan']
-
-    if log:
-
-        logger = logging.getLogger(__name__)
-
-        logger.info('Migration apllied: {}'.format(log))
-
 
 class StudentsAppConfig(AppConfig):
     name = 'students'
@@ -22,4 +13,4 @@ class StudentsAppConfig(AppConfig):
 
     def ready(self):
         from students import signals
-        post_migrate.connect(log_migrate, sender=self)
+        post_migrate.connect(signals.log_migrate, sender=self)

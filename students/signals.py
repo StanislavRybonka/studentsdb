@@ -86,10 +86,25 @@ def contact_admin_signal_handler(sender, **kwargs):
     logger.info('Email successful sended to administration, user email: {}'.format(email))
 
 
-from django.db.models import F
+def log_migrate(sender, **kwargs):
+    log = kwargs['plan']
+    db_info = kwargs['using']
+    app_label = kwargs['app_config'].label
 
-@receiver(request_started, sender=WSGIHandler)
-def count_request_handler(sender, **kwargs):
-    if request_finished:
-        LogEntry.objects.filter(date__lte=timezone.now()).update(request_counter=F('request_counter') + 1)
+    if log:
+        logger = logging.getLogger(__name__)
 
+        logger.info('Database:{}. App:{}. Migration apllied: {}'.format(db_info,app_label,log))
+
+
+request_counter = 0
+
+
+@receiver(request_started)
+def count_request(sender, **kwargs):
+    global request_counter
+    if request_started:
+        request_counter += 1
+        logger = logging.getLogger(__name__)
+
+        logger.info('Requests amount on site: {}'.format(request_counter))

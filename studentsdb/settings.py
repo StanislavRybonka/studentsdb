@@ -208,6 +208,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CONTENT_TYPES = ['PNG', 'JPEG']
 MAX_UPLOAD_SIZE = 2621440
 
+
+DEVELOPMENT_FILE = os.path.join(BASE_DIR, 'log/development.log')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -241,12 +244,6 @@ LOGGING = {
             'filename': 'log/errors.log',
             'formatter': 'verbose'
         },
-        'file_request': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': 'log/request.log',
-            'formatter': 'verbose'
-        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
@@ -261,18 +258,13 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['null', 'mail_admins','file_errors'],
+            'handlers': ['null','file_errors'],
             'propagate': True,
             'level': 'INFO',
         },
         'students.signals': {
-            'handlers': ['console', 'file_dev','file_request'],
+            'handlers': ['console','file_dev', 'mail_admins', 'db','file_errors'],
             'level': 'INFO',
-        },
-        'students': {
-            'handlers': ['console', 'file_dev', 'mail_admins', 'db','file_errors','file_request'],
-            'level': 'INFO',
-            'propagate': False,
         },
     }
 }
