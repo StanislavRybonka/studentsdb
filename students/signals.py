@@ -1,10 +1,13 @@
 import logging
 
 from django.db.models.signals import post_save, post_delete
+from django.core.signals import request_finished, request_started
 from django.dispatch import receiver
 from django import dispatch
 
-from .models import Student, Group, Exam
+from django.utils import timezone
+from django.core.handlers.wsgi import WSGIHandler
+from .models import Student, Group, Exam, LogEntry
 
 
 @receiver(post_save, sender=Student)
@@ -81,3 +84,12 @@ def contact_admin_signal_handler(sender, **kwargs):
     logger = logging.getLogger(__name__)
 
     logger.info('Email successful sended to administration, user email: {}'.format(email))
+
+
+from django.db.models import F
+
+@receiver(request_started, sender=WSGIHandler)
+def count_request_handler(sender, **kwargs):
+    if request_finished:
+        LogEntry.objects.filter(date__lte=timezone.now()).update(request_counter=F('request_counter') + 1)
+

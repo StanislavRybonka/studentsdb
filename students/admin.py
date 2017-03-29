@@ -54,7 +54,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 class LogEntryAdmin(admin.ModelAdmin):
     ordering = ['-date']
-    list_display = ['error_level','date','error_message']
+    list_display = ['error_level','date','error_message','request_counter']
     list_filter = ['error_level']
     search_fields = ['error_level','error_message']
 

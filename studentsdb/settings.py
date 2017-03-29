@@ -208,8 +208,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CONTENT_TYPES = ['PNG', 'JPEG']
 MAX_UPLOAD_SIZE = 2621440
 
-LOG_FILE = os.path.join(BASE_DIR, 'studentsdb.log')
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -231,10 +229,22 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
-        'file': {
+        'file_dev': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': LOG_FILE,
+            'filename': 'log/development.log',
+            'formatter': 'verbose'
+        },
+        'file_errors': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'log/errors.log',
+            'formatter': 'verbose'
+        },
+        'file_request': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'log/request.log',
             'formatter': 'verbose'
         },
         'mail_admins': {
@@ -251,16 +261,16 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['null','mail_admins', 'db'],
+            'handlers': ['null', 'mail_admins','file_errors'],
             'propagate': True,
             'level': 'INFO',
         },
         'students.signals': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'file_dev','file_request'],
             'level': 'INFO',
         },
         'students': {
-            'handlers': ['console', 'file', 'mail_admins', 'db'],
+            'handlers': ['console', 'file_dev', 'mail_admins', 'db','file_errors','file_request'],
             'level': 'INFO',
             'propagate': False,
         },
