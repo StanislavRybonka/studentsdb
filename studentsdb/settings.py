@@ -208,7 +208,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CONTENT_TYPES = ['PNG', 'JPEG']
 MAX_UPLOAD_SIZE = 2621440
 
-
 DEVELOPMENT_FILE = os.path.join(BASE_DIR, 'log/development.log')
 
 LOGGING = {
@@ -216,9 +215,11 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
+            '()': 'djangocolors_formatter.DjangoColorsFormatter',
             'format': '%(levelname)s %(asctime)s %(module)s: %(message)s'
         },
         'simple': {
+            '()': 'djangocolors_formatter.DjangoColorsFormatter',
             'format': '%(levelname)s: %(message)s'
         },
     },
@@ -258,12 +259,12 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['null','file_errors'],
+            'handlers': ['null', 'file_errors', 'db'],
             'propagate': True,
             'level': 'INFO',
         },
         'students.signals': {
-            'handlers': ['console','file_dev', 'mail_admins', 'db','file_errors'],
+            'handlers': ['console', 'file_dev', 'mail_admins', 'db', 'file_errors'],
             'level': 'INFO',
         },
     }

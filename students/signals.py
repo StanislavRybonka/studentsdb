@@ -1,19 +1,19 @@
 import logging
+import coloredlogs
 
 from django.db.models.signals import post_save, post_delete
-from django.core.signals import request_finished, request_started
+from django.core.signals import request_started
 from django.dispatch import receiver
 from django import dispatch
 
-from django.utils import timezone
-from django.core.handlers.wsgi import WSGIHandler
-from .models import Student, Group, Exam, LogEntry
+from .models import Student, Group, Exam
 
 
 @receiver(post_save, sender=Student)
 def log_student_updated_added_event(sender, **kwargs):
     '''Writes info abount newly added or updated student into log file'''
     logger = logging.getLogger(__name__)
+
     student = kwargs['instance']
     if kwargs['created']:
         logger.info('Student added:{} {} (ID:{})'.format(student.first_name, student.last_name, student.id))
@@ -94,11 +94,10 @@ def log_migrate(sender, **kwargs):
     if log:
         logger = logging.getLogger(__name__)
 
-        logger.info('Database:{}. App:{}. Migration apllied: {}'.format(db_info,app_label,log))
+        logger.info('Database:{}. App:{}. Migration apllied: {}'.format(db_info, app_label, log))
 
 
 request_counter = 0
-
 
 @receiver(request_started)
 def count_request(sender, **kwargs):
