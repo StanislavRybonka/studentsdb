@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django_ajax',
     'datetimewidget',
     'debug_toolbar',
+    'rosetta',
 
 ]
 BOWER_INSTALLED_APPS = (
@@ -114,16 +115,22 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
+LANGUAGE_CODE = 'en'
 USE_L10N = True
-
 USE_TZ = True
+TIME_ZONE = 'UTC'
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+# allowed languages
+LANGUAGES = [
+    ('en', 'English'),
+    ('uk', 'Ukrainian'),
+]
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -287,6 +294,8 @@ DEBUG_TOOLBAR_PANELS = [
 
 SHOW_TOOLBAR_CALLBACK = True
 INTERNAL_IPS = ['127.0.0.1']
+
+
 
 # Вказувати абсолютну адрессу
 try:

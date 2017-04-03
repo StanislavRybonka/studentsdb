@@ -17,10 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from .settings import MEDIA_ROOT, DEBUG, MEDIA_URL
 from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('students.urls')),
+
 
 ]
 # Set media files folder only for development
@@ -31,3 +33,4 @@ if DEBUG:
     urlpatterns = [
                       url(r'^__debug__/', include(debug_toolbar.urls)),
                   ] + urlpatterns
+    urlpatterns.append(url(r'^rosetta/', include('rosetta.urls')))
