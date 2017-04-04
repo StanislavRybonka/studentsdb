@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from ..forms import StudentForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.utils.translation import ugettext as _
 from ..util import paginate, get_current_group
 
 
@@ -48,7 +49,7 @@ class StudentAddView(SuccessMessageMixin, generic.CreateView):
     form_class = StudentForm
     model = Student
     success_url = reverse_lazy('students_list')
-    success_message = '%(first_name)s %(last_name)s Successfull added to datebase!'
+    success_message = _('%(first_name)s %(last_name)s Successfull added to datebase!')
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
@@ -62,7 +63,7 @@ class StudentsEditView(SuccessMessageMixin, generic.UpdateView):
     model = Student
     form_class = StudentForm
     success_url = reverse_lazy('students_list')
-    success_message = '%(first_name)s %(last_name)s Successfull updated!'
+    success_message = _('%(first_name)s %(last_name)s Successfull updated!')
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
@@ -78,4 +79,4 @@ class StudentsDeleteView(generic.DeleteView):
 
     def get_success_url(self):
         return reverse('students_list',
-                       messages.add_message(self.request, messages.SUCCESS, 'Student successful deleted'))
+                       messages.add_message(self.request, messages.SUCCESS, _('Student successful deleted')))

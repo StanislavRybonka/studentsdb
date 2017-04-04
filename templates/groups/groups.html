@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load static from staticfiles %}
-{% block meta_title %}Групи{% endblock %}
+{% load staticfiles i18n %}
+{% block meta_title %}{% trans 'Groups' %}{% endblock %}
 
 
 {% block status_message %}
@@ -22,7 +22,7 @@
     <div class="row" id="students-group-row">
         <div class="col-xs-12" id="students-group-xs">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Групи</h2></div>
+                <div class="panel-heading"><h2>{% trans 'Groups' %}</h2></div>
                 <div class="panel-body">
                     <table class="table table-hover table-striped">
                         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
@@ -31,7 +31,7 @@
                                 <th class="text-primary">№</th>
                                 <th>
                                     <a href="{% url 'groups_list' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">
-                                        Назва
+                                        {% trans 'Name' %}
                                         {% if order_by == 'title' and reverse != '1' %}&uarr;
 
                                             {% elif order_by == 'title' and reverse == '1' %}&darr;
@@ -41,7 +41,7 @@
                                 </th>
                                 <th>
                                     <a href="{% url 'groups_list' %}?order_by=leader{% if order_by == 'leader' and reverse != '1' %}&amp;reverse=1{% endif %}">
-                                        Староста
+                                        {% trans 'Leader' %}
                                         {% if order_by == 'leader' and reverse != '1' %}&uarr;
 
                                             {% elif order_by == 'leader' and reverse == '1' %}&darr;
@@ -49,7 +49,7 @@
                                         {% endif %}
                                     </a>
                                 </th>
-                                <th class="text-primary">Дії</th>
+                                <th class="text-primary">{% trans 'Actions' %}</th>
                             </tr>
                             </thead>
                         {% endwith %}
@@ -72,16 +72,16 @@
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-default dropdown-toggle" type="button"
-                                                data-toggle="dropdown">Дія
+                                                data-toggle="dropdown">{% trans 'Action' %}
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="{% url 'groups_edit' key.pk %}">Редагувати</a>
+                                                <a role="menuitem" tabindex="-1" href="{% url 'groups_edit' key.pk %}">{% trans 'Edit' %}</a>
                                             </li>
                                             <li role="presentation">
                                                 <a role="menuitem" tabindex="-1"
-                                                   href="{% url 'groups_delete' key.pk %}">Видалити</a>
+                                                   href="{% url 'groups_delete' key.pk %}">{% trans 'Delete' %}</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -91,7 +91,7 @@
                         </tbody>
                     </table>
                     <div class="text-right">
-                        <a href="{% url 'groups_add' %}" class="btn btn-primary">Додати групу</a>
+                        <a href="{% url 'groups_add' %}" class="btn btn-primary">{% trans 'Add new group' %}</a>
                     </div>
                 </div>
             </div>

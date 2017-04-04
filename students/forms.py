@@ -9,7 +9,7 @@ from studentsdb.settings import CONTENT_TYPES, MAX_UPLOAD_SIZE
 from django.core.mail import send_mail
 from studentsdb.local_settings import MANAGERS
 from .widgets import ImageWidget
-
+from django.utils.translation import ugettext as _
 from .models.group import Group
 
 from .models.exam import Exam
@@ -19,9 +19,9 @@ from .models.journal import Journal
 # Students FORM
 
 class ContactForm(forms.Form):
-    from_email = forms.EmailField(label='Your Email')
-    subject = forms.CharField(label='Subject', max_length=128)
-    message = forms.CharField(label='Message text', max_length=2500, widget=forms.Textarea)
+    from_email = forms.EmailField(label=_('Email'))
+    subject = forms.CharField(label=_('Subject'), max_length=128)
+    message = forms.CharField(label=_('Message'), max_length=2500, widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
         # call origin initializator
@@ -73,18 +73,18 @@ class StudentForm(forms.ModelForm):
 
             if not file_type in CONTENT_TYPES:
 
-                self.add_error('photo', forms.ValidationError('Invalid format for images, recommended PNG'))
+                self.add_error('photo', forms.ValidationError(_('Invalid format for images, recommended PNG')))
 
 
             elif file.size > MAX_UPLOAD_SIZE:
 
-                raise ValidationError('Invalid size.')
+                raise ValidationError(_('Invalid size.'))
         return file
 
     def clean_first_name(self):
         name = self.cleaned_data.get('first_name')
         if len(name) < 3:
-            self.add_error('first_name', ValidationError('Short name'))
+            self.add_error('first_name', ValidationError(_('Short name')))
         else:
             return name
 
@@ -93,7 +93,7 @@ class StudentForm(forms.ModelForm):
         if last_name[0].isupper():
             return last_name
         else:
-            self.add_error('last_name', ValidationError('First litter should be Capitalize'))
+            self.add_error('last_name', ValidationError(_('First litter should be Capitalize')))
 
     def clean_student_group(self):
         # take group_id from students table
@@ -103,7 +103,7 @@ class StudentForm(forms.ModelForm):
         # check if student leader anywhere
         if groups:
             if self.cleaned_data.get('student_group') != groups:
-                raise ValidationError('Student are leader in other group', code='invalid')
+                raise ValidationError(_('Student are leader in other group'), code='invalid')
 
         return self.cleaned_data['student_group']
 
@@ -128,7 +128,7 @@ class GroupForm(forms.ModelForm):
             if student_instance.student_group_id == self.instance.id:
                 return student_instance
             else:
-                self.add_error('leader', ValidationError('This student from other group.'))
+                self.add_error('leader', ValidationError(_('This student from other group.')))
 
 
 # Exam Form

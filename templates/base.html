@@ -45,7 +45,7 @@
             {% block group_menu %}
                 <strong>{% trans 'Group' %}</strong>
                 <select>
-                    <option value="">Усі студенти</option>
+                    <option value="">{% trans 'All students' %}</option>
                     {% for group in GROUPS %}
                         <option value="{{ group.id }}" {% if group.selected %}selected='2'{% endif %}>
                             {{ group.title }}{% if group.leader %},{{ group.leader }}{% endif %}
@@ -62,19 +62,19 @@
             {% with request.resolver_match.url_name as url_name %}
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="{% if url_name == 'students_list' %}active{% endif %}" data-url="{{ url_name }}">
-                        <a class="menu_item_url" href="{% url 'students_list' %}">Студенти</a>
+                        <a class="menu_item_url" href="{% url 'students_list' %}">{%  trans 'Students' %}</a>
                     </li>
                     <li class="{% if url_name == 'journal' %}active{% endif %}">
-                        <a class="menu_item_url" href="{% url 'journal' %}">Журнал</a>
+                        <a class="menu_item_url" href="{% url 'journal' %}">{% trans 'Journal' %}</a>
                     </li>
                     <li class="{% if url_name == 'groups_list' %}active{% endif %}">
-                        <a class="menu_item_url" href="{% url 'groups_list' %}">Групи</a>
+                        <a class="menu_item_url" href="{% url 'groups_list' %}">{% trans 'Group' %}</a>
                     </li>
                     <li class="{% if url_name == 'exams_list' %}active{% endif %}">
-                        <a class="menu_item_url" href="{% url 'exams_list' %}">Екзамени</a>
+                        <a class="menu_item_url" href="{% url 'exams_list' %}">{% trans 'Exams' %}</a>
                     </li>
                     <li class="{% if url_name == 'contact_form' %}active{% endif %}">
-                        <a class="menu_item_url" href="{% url 'contact-admin' %}">Contact us</a>
+                        <a class="menu_item_url" href="{% url 'contact-admin' %}">{% trans 'Contact us' %}</a>
                     </li>
                 </ul>
             {% endwith %}
@@ -106,7 +106,7 @@
         <div class="col-xs-12 text-center">
             <!-- We can override footer if need. -->
             {% block footer %}
-                &copy;2016 Сервіс Обліку студентів
+                &copy;2016 {% trans 'Accounting service' %}
             {% endblock %}
         </div>
     </div>

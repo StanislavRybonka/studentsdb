@@ -1,13 +1,13 @@
 from django.db import models
-
+from django.utils.translation import ugettext as _
 from ..models.student import Student
 
 
 class Journal(models.Model):
-    student = models.ForeignKey(Student, max_length=256, verbose_name='Student name', related_name='students',
+    student = models.ForeignKey(Student, max_length=256, verbose_name=_('Student name'), related_name='students',
                                 blank=False, unique_for_month='date')
-    date = models.DateField(blank=False, verbose_name='Date')
-    status = models.BooleanField(default=False, verbose_name='Status')
+    date = models.DateField(blank=False, verbose_name=_('Date'))
+    status = models.BooleanField(default=False, verbose_name=_('Status'))
 
 
 for i in range(1, 31):
@@ -15,4 +15,4 @@ for i in range(1, 31):
 
 
     class Meta(object):
-        verbose_name = 'Journal'
+        verbose_name = _('Journal')

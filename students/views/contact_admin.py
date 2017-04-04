@@ -1,7 +1,8 @@
 from ..forms import ContactForm
+from django.utils.translation import ugettext as _
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
-from ..models.log_entry import LogEntry
+
 
 import logging
 from students.signals import contact_admin_signal
@@ -11,7 +12,7 @@ class ContactUsView(SuccessMessageMixin, generic.FormView):
     template_name = 'contact_us/contact_us_form.html'
     form_class = ContactForm
     success_url = '/contact-admin'
-    success_message = 'Message send successful'
+    success_message = _('Message send successful')
 
     def form_valid(self, form):
         form.send_email()
@@ -21,7 +22,7 @@ class ContactUsView(SuccessMessageMixin, generic.FormView):
         return super(ContactUsView, self).form_valid(form)
 
     def form_invalid(self, form):
-        message = 'During sending process occurs issues.Try again later.'
+        message = _('During sending process occurs issues.Try again later.')
 
         logger = logging.getLogger(__name__)
 

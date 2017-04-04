@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Student, Group, Journal, Exam,LogEntry
 from .models.exam import ExamResult
 from django.forms import ModelForm, ValidationError
+from django.utils.translation import ugettext as _
 
 
 class StudentFormAdmin(ModelForm):
@@ -15,7 +16,7 @@ class StudentFormAdmin(ModelForm):
         # check if student leader anywhere
         if groups:
             if self.cleaned_data.get('student_group') != groups:
-                raise ValidationError('Student are leader in other group', code='invalid')
+                raise ValidationError(_('Student are leader in other group'), code='invalid')
 
         return self.cleaned_data['student_group']
 
@@ -41,7 +42,7 @@ class GroupFormAdmin(ModelForm):
             return student_instance
 
         else:
-            self.add_error('leader', ValidationError('This student from other group.'))
+            self.add_error('leader', ValidationError(_('This student from other group.')))
 
 
 class GroupAdmin(admin.ModelAdmin):

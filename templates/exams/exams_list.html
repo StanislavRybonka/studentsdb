@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles bootstrap3 %}
+{% load staticfiles bootstrap3 i18n%}
 
-{% block meta_title %}Exams{% endblock %}
+{% block meta_title %}{% trans 'Exams' %}{% endblock %}
 
 {% block status_message %}
     {% if messages %}
@@ -21,9 +21,9 @@
     <div class="row" id="count-visits-row">
         <div class="col-xs-12" id="count-visits-xs">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Exams List</h2>
+                <div class="panel-heading"><h2>{%  trans 'Exams List' %}</h2>
                     <div class="text-right">
-                        <a href="{% url 'exams_add' %}" class="btn btn-primary">Add new exam</a>
+                        <a href="{% url 'exams_add' %}" class="btn btn-primary">{% trans 'Add new exam' %}</a>
                     </div>
 
                 </div>
@@ -32,11 +32,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Discipline</th>
-                            <th>Date</th>
-                            <th>Examinator</th>
-                            <th>Group</th>
-                            <th>Action</th>
+                            <th>{% trans 'Discipline' %}</th>
+                            <th>{% trans 'Date' %}</th>
+                            <th>{% trans 'Examinator' %}</th>
+                            <th>{% trans 'Group' %}</th>
+                            <th>{% trans 'Action' %}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,17 +50,17 @@
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-default dropdown-toggle " type="button"
-                                                data-toggle="dropdown">Дія
+                                                data-toggle="dropdown">{% trans 'Action' %}
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li role="presentation">
                                                 <a role="menuitem" tabindex="-1"
-                                                   href="{% url 'exams_edit' key.pk %}">Редагувати</a>
+                                                   href="{% url 'exams_edit' key.pk %}">{% trans 'Edit' %}</a>
                                             </li>
                                             <li role="presentation">
                                                 <a role="menuitem" tabindex="-1"
-                                                   href="{% url 'exams_delete' key.pk %}">Видалити</a>
+                                                   href="{% url 'exams_delete' key.pk %}">{% trans 'Delete' %}</a>
                                             </li>
                                         </ul>
                                     </div>

@@ -130,8 +130,6 @@ LANGUAGES = [
     ('uk', 'Ukrainian'),
 ]
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
@@ -222,11 +220,9 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            '()': 'djangocolors_formatter.DjangoColorsFormatter',
             'format': '%(levelname)s %(asctime)s %(module)s: %(message)s'
         },
         'simple': {
-            '()': 'djangocolors_formatter.DjangoColorsFormatter',
             'format': '%(levelname)s: %(message)s'
         },
     },
@@ -294,8 +290,6 @@ DEBUG_TOOLBAR_PANELS = [
 
 SHOW_TOOLBAR_CALLBACK = True
 INTERNAL_IPS = ['127.0.0.1']
-
-
 
 # Вказувати абсолютну адрессу
 try:

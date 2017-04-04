@@ -3,6 +3,7 @@ from ..models.group import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from ..forms import GroupForm
 from django.shortcuts import reverse
+from django.utils.translation import ugettext as _
 from django.contrib import messages
 from ..util import get_current_group
 
@@ -36,7 +37,7 @@ class GroupsAddView(SuccessMessageMixin, generic.CreateView):
     model = Group
     form_class = GroupForm
     success_url = '/groups'
-    success_message = '%(title)s Added to group list!'
+    success_message = _('%(title)s Added to group list!')
 
 
 class GroupsEditView(SuccessMessageMixin, generic.UpdateView):
@@ -44,7 +45,7 @@ class GroupsEditView(SuccessMessageMixin, generic.UpdateView):
     template_name = 'groups/groups_edit.html'
     form_class = GroupForm
     success_url = '/groups'
-    success_message = '%(title)s Updated!'
+    success_message = _('%(title)s Updated!')
 
 
 class GroupsDeleteView(generic.DeleteView):
@@ -52,4 +53,4 @@ class GroupsDeleteView(generic.DeleteView):
     model = Group
 
     def get_success_url(self):
-        return reverse('groups_list', messages.add_message(self.request, messages.SUCCESS, 'Group was deleted!'))
+        return reverse('groups_list', messages.add_message(self.request, messages.SUCCESS, _('Group was deleted!')))

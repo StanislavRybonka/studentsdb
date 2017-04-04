@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
-{% load staticfiles crispy_forms_tags %}
-{% block meta_title %}Delete exam{% endblock %}
+{% load staticfiles crispy_forms_tags i18n%}
+{% block meta_title %}{% trans 'Delete exam' %}{% endblock %}
 
 {% block content %}
     <div class="row" id="edit-form-row">
         <div class="col-xs-12" id="edit-form-xs">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Delete exam: {{ object }}</h2></div>
+                <div class="panel-heading"><h2>{% trans 'Delete exam:' %} {{ object }}</h2></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-5">
                             <form action="{% url 'exams_delete' object.pk %}" method="post">
                                 {% csrf_token %}
-                                <p>You real want to delete student {{ object }}?</p>
+                                <p>{% trans 'Delete exam' %} {{ object }}?</p>
                                 <input type="submit" value="Yes" name="delete_button" class="btn btn-danger">
                             </form>
                         </div>

@@ -1,10 +1,11 @@
 import logging
-import coloredlogs
+
 
 from django.db.models.signals import post_save, post_delete
 from django.core.signals import request_started
 from django.dispatch import receiver
 from django import dispatch
+from django.utils.translation import ugettext as _
 
 from .models import Student, Group, Exam
 
@@ -16,9 +17,9 @@ def log_student_updated_added_event(sender, **kwargs):
 
     student = kwargs['instance']
     if kwargs['created']:
-        logger.info('Student added:{} {} (ID:{})'.format(student.first_name, student.last_name, student.id))
+        logger.info(_('Student added:{} {} (ID:{})').format(student.first_name, student.last_name, student.id))
     else:
-        logger.info('Student updated:{} {} (ID:{})'.format(student.first_name, student.last_name, student.id))
+        logger.info(_('Student updated:{} {} (ID:{})').format(student.first_name, student.last_name, student.id))
 
 
 @receiver(post_delete, sender=Student)
@@ -28,7 +29,7 @@ def log_student_deleted_event(sender, **kwargs):
     logger = logging.getLogger(__name__)
 
     student = kwargs['instance']
-    logger.info('Student deleted:{} {} (ID:{})'.format(student.first_name, student.last_name, student.id))
+    logger.info(_('Student deleted:{} {} (ID:{})').format(student.first_name, student.last_name, student.id))
 
 
 @receiver(post_save, sender=Group)
@@ -37,9 +38,9 @@ def log_group_updated_added_event(sender, **kwargs):
     logger = logging.getLogger(__name__)
     group = kwargs['instance']
     if kwargs['created']:
-        logger.info('Group added, title:{} (ID:{})'.format(group.title, group.id))
+        logger.info(_('Group added, title:{} (ID:{})').format(group.title, group.id))
     else:
-        logger.info('Group updated, title:{} (ID:{})'.format(group.title, group.id))
+        logger.info(_('Group updated, title:{} (ID:{})').format(group.title, group.id))
 
 
 @receiver(post_delete, sender=Group)
@@ -49,7 +50,7 @@ def log_group_deleted_event(sender, **kwargs):
     logger = logging.getLogger(__name__)
 
     group = kwargs['instance']
-    logger.info('Group deleted, title:{} (ID:{})'.format(group.title, group.id))
+    logger.info(_('Group deleted, title:{} (ID:{})').format(group.title, group.id))
 
 
 @receiver(post_save, sender=Exam)
@@ -59,9 +60,9 @@ def log_exam_updated_added_event(sender, **kwargs):
     exam = kwargs['instance']
 
     if kwargs['created']:
-        logger.info('Exam was added, discipline:{} (ID:{})'.format(exam.discipline_name, exam.id))
+        logger.info(_('Exam was added, discipline:{} (ID:{})').format(exam.discipline_name, exam.id))
     else:
-        logger.info('Exam was updated, discipline:{} (ID:{})'.format(exam.discipline_name, exam.id))
+        logger.info(_('Exam was updated, discipline:{} (ID:{})').format(exam.discipline_name, exam.id))
 
 
 @receiver(post_delete, sender=Exam)
@@ -71,7 +72,7 @@ def log_exam_deleted_event(sender, **kwargs):
     logger = logging.getLogger(__name__)
 
     exam = kwargs['instance']
-    logger.info('Exam was deleted, discipline:{} (ID:{})'.format(exam.discipline_name, exam.id))
+    logger.info(_('Exam was deleted, discipline:{} (ID:{})').format(exam.discipline_name, exam.id))
 
 
 contact_admin_signal = dispatch.Signal(providing_args=["from_email"])
@@ -83,7 +84,7 @@ def contact_admin_signal_handler(sender, **kwargs):
 
     logger = logging.getLogger(__name__)
 
-    logger.info('Email successful sended to administration, user email: {}'.format(email))
+    logger.info(_('Email successful sended to administration, user email: {}').format(email))
 
 
 def log_migrate(sender, **kwargs):
@@ -94,7 +95,7 @@ def log_migrate(sender, **kwargs):
     if log:
         logger = logging.getLogger(__name__)
 
-        logger.info('Database:{}. App:{}. Migration apllied: {}'.format(db_info, app_label, log))
+        logger.info(_('Database:{}. App:{}. Migration apllied: {}').format(db_info, app_label, log))
 
 
 request_counter = 0
@@ -106,4 +107,4 @@ def count_request(sender, **kwargs):
         request_counter += 1
         logger = logging.getLogger(__name__)
 
-        logger.info('Requests amount on site: {}'.format(request_counter))
+        logger.info(_('Requests amount on site: {}').format(request_counter))

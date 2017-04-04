@@ -4,6 +4,7 @@ from ..models.exam import Exam
 from ..forms import ExamForm
 from  django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import reverse
+from django.utils.translation import ugettext as _
 from django.contrib import messages
 from ..util import get_current_group
 
@@ -39,7 +40,7 @@ class ExamAddView(SuccessMessageMixin, generic.CreateView):
     template_name = 'exams/exam_add_form.html'
     form_class = ExamForm
     success_url = '/exams'
-    success_message = 'New exam of %(discipline_name)s had been addded to DB!'
+    success_message = _('New exam of %(discipline_name)s had been addded to DB!')
 
 
 class ExamEditView(SuccessMessageMixin, generic.UpdateView):
@@ -47,7 +48,7 @@ class ExamEditView(SuccessMessageMixin, generic.UpdateView):
     template_name = 'exams/exam_edit_form.html'
     form_class = ExamForm
     success_url = '/exams'
-    success_message = '%(discipline_name)s was updated!'
+    success_message = _('%(discipline_name)s was updated!')
 
 
 class ExamDeleteView(generic.DeleteView):
@@ -55,4 +56,4 @@ class ExamDeleteView(generic.DeleteView):
     template_name = 'exams/exam_delete_confirm.html'
 
     def get_success_url(self):
-        return reverse('exams_list', messages.add_message(self.request, messages.SUCCESS, 'Exam deleted successful!'))
+        return reverse('exams_list', messages.add_message(self.request, messages.SUCCESS, _('Exam deleted successful!')))

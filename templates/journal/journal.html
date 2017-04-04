@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load  staticfiles bootstrap3 %}
+{% load  staticfiles bootstrap3 i18n %}
 
-{% block meta_title %}Журнал{% endblock %}
+{% block meta_title %}{% trans 'Journal' %}{% endblock %}
 {% block stylesheet %}
 
 {% endblock %}
@@ -12,19 +12,19 @@
 
             {% if not students %}
                 <div class="alert alert-warning">
-                    Empty list
-                    <a href="{% url 'students_add' %}">Add students</a>
+                    {% trans 'Empty list' %}
+                    <a href="{% url 'students_add' %}">{% trans 'Add student' %}</a>
                 </div>
             {% else %}
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h2>Облік відвідування</h2></div>
+                    <div class="panel-heading"><h2>{% trans 'Accounting' %}</h2></div>
                     <div class="panel-body">
                         <div class="alert alert-warning">
-                            Autosaving by each click
-                            <span id="ajax-progress-indicator">Process...</span>
+                            {% trans 'Autosaving by each click' %}
+                            <span id="ajax-progress-indicator">{% trans 'Process...' %}</span>
                         </div>
                         <div class="alert alert-danger" id="ajax-request-errors">
-                            Some errors occurs during request
+                            {%  trans 'Some errors occurs during request' %}
                         </div>
                         <div class="text-center" id="journal-nav">
                             <a href="?month={{ prev_month }}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
@@ -40,7 +40,7 @@
                             <thead>
                             <tr class="header">
                                 <th class="num">№</th>
-                                <th class="name">Student</th>
+                                <th class="name">{% trans 'Student' %}</th>
                                 {% for day in month_header %}
                                     <th class="day-header">
                                         <!-- TO DO translate day here -->
