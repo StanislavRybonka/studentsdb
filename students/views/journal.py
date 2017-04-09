@@ -13,7 +13,7 @@ from ..util import paginate, get_current_group
 
 # Manage Journal
 class JournalView(generic.TemplateView):
-    template_name = "journal/journal.html"
+    template_name = "cabinet_/journal/journal.html"
 
     def get_context_data(self, **kwargs):
 
@@ -133,11 +133,11 @@ class JournalView(generic.TemplateView):
 
 
 class JournalSpecificStudentView(generic.TemplateView):
-    template_name = 'journal/journal_specific_student.html'
+    template_name = 'cabinet_/journal/journal_specific_student.html'
 
     def get_student(self, request, jid):
         return render(self, request, jid)
 
 
 class JournalUpdateView(generic.TemplateView):
-    template_name = 'journal/journal_update.html'
+    template_name = 'cabinet_/journal/journal_update.html'

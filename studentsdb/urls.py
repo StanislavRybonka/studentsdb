@@ -15,14 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.i18n import JavaScriptCatalog
 from .settings import MEDIA_ROOT, DEBUG, MEDIA_URL
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('students.urls')),
-
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'cabinet/', include('students.urls')),
+    url(r'', include('core.urls')),
 
 ]
 # Set media files folder only for development

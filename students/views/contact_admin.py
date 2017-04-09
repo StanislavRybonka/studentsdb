@@ -9,7 +9,7 @@ from students.signals import contact_admin_signal
 
 
 class ContactUsView(SuccessMessageMixin, generic.FormView):
-    template_name = 'contact_us/contact_us_form.html'
+    template_name = 'site_/../../templates/contact_us/contact_us_form.html'
     form_class = ContactForm
     success_url = '/contact-admin'
     success_message = _('Message send successful')

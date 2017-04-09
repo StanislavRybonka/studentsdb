@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
-{% load  staticfiles bootstrap3 i18n %}
+{% extends 'base_cabinet_.html' %}
+{% load  i18n  %}
+{% load  staticfiles bootstrap3%}
 
 {% block meta_title %}{% trans 'Journal' %}{% endblock %}
 {% block stylesheet %}
@@ -43,8 +44,7 @@
                                 <th class="name">{% trans 'Student' %}</th>
                                 {% for day in month_header %}
                                     <th class="day-header">
-                                        <!-- TO DO translate day here -->
-                                        {{ day.verbose }}
+                                        {% trans day.verbose %}
                                         <br>
                                         {{ day.day }}
                                     </th>
