@@ -320,6 +320,12 @@ function initPhotoPreview() {
     });
 }
 
+function initChangeLanguage() {
+    $("#language-form").change(function (event) {
+        this.submit();
+    });
+}
+
 $(document).ready(function () {
     initJournal();
     initGroupSelector();
@@ -329,5 +335,7 @@ $(document).ready(function () {
     orderByStudents();
     initPaginate();
     initPhotoPreview();
+    initChangeLanguage();
+
 });
 
