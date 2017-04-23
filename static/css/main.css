@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 
 td.day-box,
 th.day-header{
-    padding: 4px !important;
+    padding: 2px !important;
     vertical-align: middle !important;
     text-align: center;
 }

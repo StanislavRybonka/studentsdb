@@ -58,7 +58,7 @@ media
 components*
 staticfiles*
 node_modules*
-static*
+static
 
 
 

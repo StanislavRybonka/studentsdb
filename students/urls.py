@@ -4,6 +4,7 @@ from students.views import students as students_views, groups as groups_views, j
     exams as exams_views
 from .views.contact_admin import ContactUsView
 
+
 urlpatterns = [
     # Students urls
     url(r'^students-list/$', students_views.StudentsListView.as_view(), name='students_list'),

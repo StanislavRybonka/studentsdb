@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-09 08:23+0000\n"
+"POT-Creation-Date: 2017-04-22 10:49+0000\n"
 "PO-Revision-Date: 2017-04-09 13:43+0000\n"
 "Last-Translator: b'  <root@root.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Translated-Using: django-rosetta 0.7.12\n"
 
 #: students/admin.py:19 students/forms.py:106
@@ -60,7 +61,8 @@ msgid "Discipline name"
 msgstr ""
 
 #: students/models/exam.py:8 students/models/journal.py:9
-#: templates/exams/exam_results.html:21 templates/exams/exams_list.html:36
+#: templates/cabinet_/exams/exam_results.html:21
+#: templates/cabinet_/exams/exams_list.html:36
 msgid "Date"
 msgstr ""
 
@@ -69,8 +71,8 @@ msgid "Teacher name"
 msgstr ""
 
 #: students/models/exam.py:10 students/models/group.py:14
-#: students/models/student.py:19 templates/base.html:46 templates/base.html:71
-#: templates/exams/exams_list.html:38
+#: students/models/student.py:19 templates/base_cabinet_.html:46
+#: templates/base_cabinet_.html:75 templates/cabinet_/exams/exams_list.html:38
 msgid "Group"
 msgstr "Група"
 
@@ -78,13 +80,15 @@ msgstr "Група"
 msgid "Exam"
 msgstr ""
 
-#: students/models/exam.py:14 templates/base.html:74
-#: templates/exams/exam_add_form.html:4 templates/exams/exams_list.html:4
+#: students/models/exam.py:14 templates/base_cabinet_.html:78
+#: templates/cabinet_/exams/exam_add_form.html:4
+#: templates/cabinet_/exams/exams_list.html:4
 msgid "Exams"
 msgstr ""
 
 #: students/models/exam.py:22 students/models/student.py:22
-#: templates/exams/exam_results.html:19 templates/journal/journal.html:43
+#: templates/cabinet_/exams/exam_results.html:19
+#: templates/cabinet_/journal/journal.html:43
 msgid "Student"
 msgstr ""
 
@@ -97,11 +101,12 @@ msgid "Exam Results"
 msgstr ""
 
 #: students/models/group.py:9 students/models/student.py:12
-#: templates/groups/groups.html:34 templates/students/students_list.html:51
+#: templates/cabinet_/groups/groups.html:34
+#: templates/cabinet_/students/students_list.html:51
 msgid "Name"
 msgstr ""
 
-#: students/models/group.py:10 templates/groups/groups.html:44
+#: students/models/group.py:10 templates/cabinet_/groups/groups.html:44
 msgid "Leader"
 msgstr ""
 
@@ -109,9 +114,8 @@ msgstr ""
 msgid "Additional notices"
 msgstr ""
 
-#: students/models/group.py:15 templates/groups/groups.html:3
-#: templates/groups/groups.html:25
-#| msgid "Group"
+#: students/models/group.py:15 templates/cabinet_/groups/groups.html:3
+#: templates/cabinet_/groups/groups.html:25
 msgid "Groups"
 msgstr "Група"
 
@@ -123,8 +127,8 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: students/models/journal.py:18 templates/base.html:68
-#: templates/journal/journal.html:4
+#: students/models/journal.py:18 templates/base_cabinet_.html:72
+#: templates/cabinet_/journal/journal.html:5
 msgid "Journal"
 msgstr ""
 
@@ -136,7 +140,8 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: students/models/student.py:13 templates/students/students_list.html:62
+#: students/models/student.py:13
+#: templates/cabinet_/students/students_list.html:62
 msgid "Surname"
 msgstr ""
 
@@ -148,12 +153,13 @@ msgstr ""
 msgid "Date of birthday"
 msgstr ""
 
-#: students/models/student.py:17 templates/students/students_list.html:73
+#: students/models/student.py:17
+#: templates/cabinet_/students/students_list.html:73
 msgid "Ticket"
 msgstr ""
 
-#: students/models/student.py:23 templates/base.html:65
-#: templates/students/students_list.html:4
+#: students/models/student.py:23 templates/base_cabinet_.html:69
+#: templates/cabinet_/students/students_list.html:4
 msgid "Students"
 msgstr ""
 
@@ -308,24 +314,233 @@ msgstr ""
 msgid "Rosetta"
 msgstr ""
 
-#: templates/base.html:22
+#: templates/base_cabinet_.html:22
 msgid "Accounting Service"
 msgstr "Сервіс обліку студентів"
 
-#: templates/base.html:23
+#: templates/base_cabinet_.html:23
 msgid "App to manage students"
 msgstr ""
 
-#: templates/base.html:38 templates/base.html:109
+#: templates/base_cabinet_.html:38 templates/base_cabinet_.html:113
 msgid "Accounting service"
 msgstr "Сервіс"
 
-#: templates/base.html:48
+#: templates/base_cabinet_.html:48
 msgid "All students"
 msgstr ""
 
-#: templates/base.html:77
+#: templates/base_cabinet_.html:81
 msgid "Contact us"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_add_form.html:10
+msgid "Exams list"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_add_form.html:15
+msgid "Add Exam form"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_add_form.html:27
+#: templates/cabinet_/exams/exam_edit_form.html:28
+#: templates/cabinet_/students/student_add_form.html:49
+#: templates/cabinet_/students/students_edit_form.html:46
+msgid "Save"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_add_form.html:31
+#: templates/cabinet_/exams/exam_edit_form.html:33
+#: templates/cabinet_/students/student_add_form.html:54
+#: templates/cabinet_/students/students_edit_form.html:51
+msgid "Cancel"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_delete_confirm.html:3
+#: templates/cabinet_/exams/exam_delete_confirm.html:15
+msgid "Delete exam"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_delete_confirm.html:9
+msgid "Delete exam:"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_edit_form.html:3
+msgid "Edit exam"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_edit_form.html:14
+msgid "Edit exam form"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_results.html:4
+#: templates/cabinet_/exams/exam_results.html:12
+msgid "Exams result"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_results.html:18
+#: templates/cabinet_/exams/exams_list.html:35
+msgid "Discipline"
+msgstr ""
+
+#: templates/cabinet_/exams/exam_results.html:20
+msgid "Rating"
+msgstr ""
+
+#: templates/cabinet_/exams/exams_list.html:24
+msgid "Exams List"
+msgstr ""
+
+#: templates/cabinet_/exams/exams_list.html:26
+msgid "Add new exam"
+msgstr ""
+
+#: templates/cabinet_/exams/exams_list.html:37
+msgid "Examinator"
+msgstr ""
+
+#: templates/cabinet_/exams/exams_list.html:39
+#: templates/cabinet_/exams/exams_list.html:53
+#: templates/cabinet_/groups/groups.html:75
+#: templates/cabinet_/students/students_list.html:81
+#: templates/cabinet_/students/students_list.html:123
+msgid "Action"
+msgstr ""
+
+#: templates/cabinet_/exams/exams_list.html:59
+#: templates/cabinet_/groups/groups.html:80
+#: templates/cabinet_/students/students_list.html:129
+msgid "Edit"
+msgstr ""
+
+#: templates/cabinet_/exams/exams_list.html:63
+#: templates/cabinet_/groups/groups.html:84
+#: templates/cabinet_/groups/groups_delete_confirm.html:19
+#: templates/cabinet_/students/students_list.html:137
+msgid "Delete"
+msgstr ""
+
+#: templates/cabinet_/groups/groups.html:52
+msgid "Actions"
+msgstr ""
+
+#: templates/cabinet_/groups/groups.html:94
+#: templates/cabinet_/groups/groups_add.html:3
+#: templates/cabinet_/groups/groups_add.html:9
+msgid "Add new group"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_add.html:14
+msgid "Add group form"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_add.html:21
+msgid "Add group"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_delete_confirm.html:3
+msgid "Delete group"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_delete_confirm.html:9
+#: templates/cabinet_/groups/groups_delete_confirm.html:17
+msgid "Delete group:"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_edit.html:4
+#: templates/cabinet_/groups/groups_edit.html:10
+msgid "Edit group"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_edit.html:15
+msgid "Edit group form"
+msgstr ""
+
+#: templates/cabinet_/groups/groups_edit.html:22
+#: templates/cabinet_/journal/journal_specific_student.html:16
+msgid "Update"
+msgstr ""
+
+#: templates/cabinet_/journal/journal.html:16
+msgid "Empty list"
+msgstr ""
+
+#: templates/cabinet_/journal/journal.html:17
+#: templates/cabinet_/students/students_list.html:28
+msgid "Add student"
+msgstr ""
+
+#: templates/cabinet_/journal/journal.html:21
+msgid "Accounting"
+msgstr "Сервіс"
+
+#: templates/cabinet_/journal/journal.html:24
+msgid "Autosaving by each click"
+msgstr ""
+
+#: templates/cabinet_/journal/journal.html:25
+msgid "Process..."
+msgstr ""
+
+#: templates/cabinet_/journal/journal.html:28
+msgid "Some errors occurs during request"
+msgstr ""
+
+#: templates/cabinet_/journal/journal_specific_student.html:3
+#: templates/cabinet_/journal/journal_specific_student.html:11
+msgid "Students attanding"
+msgstr ""
+
+#: templates/cabinet_/journal/journal_update.html:3
+#: templates/cabinet_/journal/journal_update.html:11
+msgid "Update attend"
+msgstr ""
+
+#: templates/cabinet_/students/student_add_form.html:3
+#: templates/cabinet_/students/student_add_form.html:13
+msgid "Add students"
+msgstr ""
+
+#: templates/cabinet_/students/student_add_form.html:18
+msgid "Add students form"
+msgstr ""
+
+#: templates/cabinet_/students/student_add_form.html:35
+#: templates/cabinet_/students/students_edit_form.html:33
+msgid "New foto"
+msgstr ""
+
+#: templates/cabinet_/students/students_confirm_delete.html:3
+#: templates/cabinet_/students/students_confirm_delete.html:9
+msgid "Delete student"
+msgstr ""
+
+#: templates/cabinet_/students/students_confirm_delete.html:15
+msgid "Delete student. Confirm?"
+msgstr ""
+
+#: templates/cabinet_/students/students_confirm_delete.html:16
+msgid "Yes"
+msgstr ""
+
+#: templates/cabinet_/students/students_edit_form.html:4
+msgid "Edit students"
+msgstr ""
+
+#: templates/cabinet_/students/students_edit_form.html:10
+msgid "Personal data"
+msgstr ""
+
+#: templates/cabinet_/students/students_edit_form.html:15
+msgid "Edit student form"
+msgstr ""
+
+#: templates/cabinet_/students/students_list.html:26
+msgid "Students db"
+msgstr ""
+
+#: templates/cabinet_/students/students_list.html:133
+msgid "Attend"
 msgstr ""
 
 #: templates/contact_us/contact_us_form.html:3
@@ -341,203 +556,6 @@ msgstr ""
 msgid "Feedback form"
 msgstr ""
 
-#: templates/exams/exam_add_form.html:10
-msgid "Exams list"
-msgstr ""
-
-#: templates/exams/exam_add_form.html:15
-msgid "Add Exam form"
-msgstr ""
-
-#: templates/exams/exam_add_form.html:27
-#: templates/exams/exam_edit_form.html:28
-#: templates/students/student_add_form.html:49
-#: templates/students/students_edit_form.html:46
-msgid "Save"
-msgstr ""
-
-#: templates/exams/exam_add_form.html:31
-#: templates/exams/exam_edit_form.html:33
-#: templates/students/student_add_form.html:54
-#: templates/students/students_edit_form.html:51
-msgid "Cancel"
-msgstr ""
-
-#: templates/exams/exam_delete_confirm.html:3
-#: templates/exams/exam_delete_confirm.html:15
-msgid "Delete exam"
-msgstr ""
-
-#: templates/exams/exam_delete_confirm.html:9
-msgid "Delete exam:"
-msgstr ""
-
-#: templates/exams/exam_edit_form.html:3
-msgid "Edit exam"
-msgstr ""
-
-#: templates/exams/exam_edit_form.html:14
-msgid "Edit exam form"
-msgstr ""
-
-#: templates/exams/exam_results.html:4 templates/exams/exam_results.html:12
-msgid "Exams result"
-msgstr ""
-
-#: templates/exams/exam_results.html:18 templates/exams/exams_list.html:35
-msgid "Discipline"
-msgstr ""
-
-#: templates/exams/exam_results.html:20
-msgid "Rating"
-msgstr ""
-
-#: templates/exams/exams_list.html:24
-msgid "Exams List"
-msgstr ""
-
-#: templates/exams/exams_list.html:26
-msgid "Add new exam"
-msgstr ""
-
-#: templates/exams/exams_list.html:37
-msgid "Examinator"
-msgstr ""
-
-#: templates/exams/exams_list.html:39 templates/exams/exams_list.html:53
-#: templates/groups/groups.html:75 templates/students/students_list.html:81
-#: templates/students/students_list.html:123
-msgid "Action"
-msgstr ""
-
-#: templates/exams/exams_list.html:59 templates/groups/groups.html:80
-#: templates/students/students_list.html:129
-msgid "Edit"
-msgstr ""
-
-#: templates/exams/exams_list.html:63 templates/groups/groups.html:84
-#: templates/groups/groups_delete_confirm.html:19
-#: templates/students/students_list.html:137
-msgid "Delete"
-msgstr ""
-
-#: templates/groups/groups.html:52
-msgid "Actions"
-msgstr ""
-
-#: templates/groups/groups.html:94 templates/groups/groups_add.html:3
-#: templates/groups/groups_add.html:9
-msgid "Add new group"
-msgstr ""
-
-#: templates/groups/groups_add.html:14
-msgid "Add group form"
-msgstr ""
-
-#: templates/groups/groups_add.html:21
-msgid "Add group"
-msgstr ""
-
-#: templates/groups/groups_delete_confirm.html:3
-msgid "Delete group"
-msgstr ""
-
-#: templates/groups/groups_delete_confirm.html:9
-#: templates/groups/groups_delete_confirm.html:17
-msgid "Delete group:"
-msgstr ""
-
-#: templates/groups/groups_edit.html:4 templates/groups/groups_edit.html:10
-msgid "Edit group"
-msgstr ""
-
-#: templates/groups/groups_edit.html:15
-msgid "Edit group form"
-msgstr ""
-
-#: templates/groups/groups_edit.html:22
-#: templates/journal/journal_specific_student.html:16
-msgid "Update"
-msgstr ""
-
-#: templates/journal/journal.html:15
-msgid "Empty list"
-msgstr ""
-
-#: templates/journal/journal.html:16 templates/students/students_list.html:28
-msgid "Add student"
-msgstr ""
-
-#: templates/journal/journal.html:20
-#| msgid "Accounting service"
-msgid "Accounting"
-msgstr "Сервіс"
-
-#: templates/journal/journal.html:23
-msgid "Autosaving by each click"
-msgstr ""
-
-#: templates/journal/journal.html:24
-msgid "Process..."
-msgstr ""
-
-#: templates/journal/journal.html:27
-msgid "Some errors occurs during request"
-msgstr ""
-
-#: templates/journal/journal_specific_student.html:3
-#: templates/journal/journal_specific_student.html:11
-msgid "Students attanding"
-msgstr ""
-
-#: templates/journal/journal_update.html:3
-#: templates/journal/journal_update.html:11
-msgid "Update attend"
-msgstr ""
-
-#: templates/students/student_add_form.html:3
-#: templates/students/student_add_form.html:13
-msgid "Add students"
-msgstr ""
-
-#: templates/students/student_add_form.html:18
-msgid "Add students form"
-msgstr ""
-
-#: templates/students/student_add_form.html:35
-#: templates/students/students_edit_form.html:33
-msgid "New foto"
-msgstr ""
-
-#: templates/students/students_confirm_delete.html:3
-#: templates/students/students_confirm_delete.html:9
-msgid "Delete student"
-msgstr ""
-
-#: templates/students/students_confirm_delete.html:15
-msgid "Delete student. Confirm?"
-msgstr ""
-
-#: templates/students/students_confirm_delete.html:16
-msgid "Yes"
-msgstr ""
-
-#: templates/students/students_edit_form.html:4
-msgid "Edit students"
-msgstr ""
-
-#: templates/students/students_edit_form.html:10
-msgid "Personal data"
-msgstr ""
-
-#: templates/students/students_edit_form.html:15
-msgid "Edit student form"
-msgstr ""
-
-#: templates/students/students_list.html:26
-msgid "Students db"
-msgstr ""
-
-#: templates/students/students_list.html:133
-msgid "Attend"
+#: templates/site_/home.html:3
+msgid "Home"
 msgstr ""

@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'students',
     'crispy_forms',
     'bootstrap3',
     'contact_form',
@@ -37,6 +36,10 @@ INSTALLED_APPS = [
     'datetimewidget',
     'debug_toolbar',
     'rosetta',
+
+    # Own Apps
+    'students',
+    'accounts',
 
 ]
 
@@ -126,6 +129,7 @@ LOCALE_PATHS = (
 LANGUAGES = [
     ('en', 'English'),
     ('uk', 'Ukrainian'),
+    ('ru', 'Russian'),
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -197,11 +201,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

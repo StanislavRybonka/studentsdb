@@ -19,15 +19,19 @@ from django.views.i18n import JavaScriptCatalog
 from .settings import MEDIA_ROOT, DEBUG, MEDIA_URL
 from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+js_info_dict = {
+    'packages': ('students',),
+}
+
+urlpatterns = i18n_patterns(
     url(r'^admin/', admin.site.urls),
     url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'cabinet/', include('students.urls')),
     url(r'', include('core.urls')),
-
-]
+)
 # Set media files folder only for development
 if DEBUG:
     urlpatterns += [] + static(MEDIA_URL, document_root=MEDIA_ROOT)
