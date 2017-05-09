@@ -1,11 +1,10 @@
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), ".."),
-)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -18,7 +17,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
+
+ROOT_URLCONF = 'studentsdb.urls'
+
+BASE_URL = 'http://127.0.0.1:8000'
+
+LOGIN_REDIRECT_URL = reverse_lazy('groups_list')
+
+
+
+
+AUTH_USER_MODEL = 'accounts.Account'
+
+AUTHENTICATION_BACKENDS = (
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,6 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'crispy_forms',
     'bootstrap3',
     'contact_form',
@@ -40,6 +66,7 @@ INSTALLED_APPS = [
     # Own Apps
     'students',
     'accounts',
+    'core',
 
 ]
 
@@ -58,9 +85,9 @@ MIDDLEWARE = [
 
 ]
 
-ROOT_URLCONF = 'studentsdb.urls'
 
-BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -135,6 +162,9 @@ LANGUAGES = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+
+
+
 BOOTSTRAP3 = {
 
     # The URL to the jQuery JavaScript file
@@ -195,11 +225,7 @@ BOOTSTRAP3 = {
     },
 }
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
@@ -286,7 +312,12 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 SHOW_TOOLBAR_CALLBACK = True
-INTERNAL_IPS = ['127.0.0.1']
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Вказувати абсолютну адрессу
 try:

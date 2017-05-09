@@ -15,8 +15,9 @@
           <li><a href="{% url 'team-page' %}">Team</a></li>
           <li><a href="#">Contact us</a></li>
 
-          <li><a href="#" data-target="#login" data-toggle="modal">Sign in</a></li>
-          <li class="btn-trial"><a href="#footer">Sign Up!</a></li>
+          <li><a href="{% url 'account_login' %}" data-target="#login" data-toggle="modal">Sign in</a></li>
+          <li class="btn-trial"><a href="{% url 'account_signup' %}">Sign Up!</a></li>
+               <li class="btn-trial"><a href="{% url 'account_logout' %}">out!</a></li>
         </ul>
         </div>
       </div>
