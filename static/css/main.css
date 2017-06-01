@@ -52,15 +52,29 @@ th.day-header{
 #id_photo{
     padding-top: 10px;
 }
-.option-val{
-     margin: 0;
-    width: 85%;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    height: 30px;
-    line-height: 30px;
-    color: #555555;
+
+#language-flag{
+    margin-top: 20px;
+    margin-left: 18px;
+
 }
-#language-form{
-    margin-top: 30px;
+#lang-bar{
+    margin-top: -5px;
+    margin-left: -10px;
+
+}
+.current-lang{
+    cursor: pointer;
+
+
+
+}
+
+.lang{
+    margin-left: 40px;
+}
+.dropdown-menu{
+    border: none;
+    box-shadow: none;
+    height: 30px;
 }

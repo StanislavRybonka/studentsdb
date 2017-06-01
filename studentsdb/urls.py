@@ -31,6 +31,7 @@ urlpatterns = i18n_patterns(
     url(r'cabinet/', include('students.urls')),
     url(r'', include('core.urls')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^manager/', include('manager.urls', 'manager', 'manager')),
 )
 # Set media files folder only for development
 if DEBUG:

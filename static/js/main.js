@@ -321,8 +321,14 @@ function initPhotoPreview() {
 }
 
 function initChangeLanguage() {
-    $("#language-form").change(function (event) {
-        this.submit();
+
+    $(".current-lang").click(function (event) {
+
+        var lang = $(this).data('lang');
+
+        $('#set_language').val(lang);
+
+        $('#language-form').submit();
     });
 }
 
