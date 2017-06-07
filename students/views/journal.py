@@ -30,6 +30,7 @@ class JournalView(generic.TemplateView):
             # otherwise just displaying current month data
             today = datetime.today()
             month = date(today.year, today.month, 1)
+            print(month)
 
         # calculate current, previous and next month details
         # we need this for navigation element in template

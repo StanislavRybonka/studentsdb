@@ -39,6 +39,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,6 +156,9 @@ LANGUAGES = [
     ('uk', 'Ukrainian'),
     ('ru', 'Russian'),
 ]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_LANGUAGES = ('en', 'uk','ru')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

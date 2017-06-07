@@ -53,7 +53,7 @@ local_settings.py
 .idea/
 # all log files
 *.log*
-*.venv*
+*.env*
 media
 components*
 staticfiles*
